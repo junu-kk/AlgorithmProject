@@ -1,1 +1,10 @@
 hi!
+my name is kyeongchan
+
+컴에서 작업하고 올릴때는
+1. add
+2. commit
+3. push
+
+깃허브에 있는거 끌어올때는
+pull
