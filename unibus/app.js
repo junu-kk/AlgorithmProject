@@ -9,13 +9,13 @@ var library={
   passport : require('./library/passport'),
   database : require('./library/database'),
 };
-
+var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/authentication/login');
 var signupRouter = require('./routes/authentication/signup');
 var logoutRouter = require('./routes/authentication/logout');
+var mainRouter = require('./routes/main');
 
 var app = express();
 
@@ -31,12 +31,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//img middleware
+
+//authentication middleware
+app.use(session({secret:'@$!#!D1!@#%!(^)$@#', resave:true, saveUninitialized:false}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/signup', signupRouter);
+app.use('/main', mainRouter);
 
 
 // catch 404 and forward to error handler
