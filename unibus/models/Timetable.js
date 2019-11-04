@@ -5,7 +5,7 @@ var timetableSchema=mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'User'
   },
-  mon:[
+  mon:[{
     info:{
       type:String
     },
@@ -15,8 +15,8 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
-  tue:[
+  }],
+  tue:[{
     info:{
       type:String
     },
@@ -26,8 +26,8 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
-  wed:[
+  }],
+  wed:[{
     info:{
       type:String
     },
@@ -37,8 +37,8 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
-  thu:[
+  }],
+  thu:[{
     info:{
       type:String
     },
@@ -48,8 +48,8 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
-  fri:[
+  }],
+  fri:[{
     info:{
       type:String
     },
@@ -59,8 +59,8 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
-  sat:[
+  }],
+  sat:[{
     info:{
       type:String
     },
@@ -70,8 +70,8 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
-  sun:[
+  }],
+  sun:[{
     info:{
       type:String
     },
@@ -81,7 +81,7 @@ var timetableSchema=mongoose.Schema({
     endTime:{
       type:Date
     }
-  ],
+  }],
   
 });
 

@@ -50,9 +50,21 @@ module.exports = function(){
           message:'Email already exists.'
         });
       } else{//성공
+        var newUser = new User();
         
+        newUser.name = req.body.name;
+        newUser.sid = req.body.sid;
+        newUser.email = email;
+        newUser.password = password;
+
+        newUser.save(function(err){
+          if(err){
+            console.log(err);
+          } else{
+            return done(null, newUser);
+          }
+        });
       }
-      
     });
   }));
 }

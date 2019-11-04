@@ -30,13 +30,9 @@ var userSchema=mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'Class'
   }],
-  teams:[{
+  members:[{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'Team'
-  }],
-  posts:[{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Post'
+    ref:'Member'
   }],
   timetable:{
     type:mongoose.Schema.Types.ObjectId,

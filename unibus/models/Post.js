@@ -9,9 +9,32 @@ var postSchema=mongoose.Schema({
   },
   updateTime:{
     type:Date,
-    default:Date.now(),
+    default:Date.now,
   },
-  //좋아요댓글점수등등 구현해야함
+  by:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Member'
+  },
+  likes:[{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Member'
+  }],
+  comments:[{
+    by:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Member'
+    },
+    contents:{
+      type:String,
+    },
+    updateTime:{
+      type:Date,
+      default:Date.now,
+    }
+  }],
+  file:{
+    type:String,
+  }
 });
 
 postSchema.methods={

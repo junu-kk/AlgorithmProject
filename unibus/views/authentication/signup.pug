@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h2 SIGNUP
+  div(style="color:red;") #{feedback}
+  form(action="/signup" method="POST")
+    p 이름 : 
+    input(name="name" type="text")
+    p 학번 :
+    input(name="sid" type="text")
+    p Email : 
+    input(name="email" type="email")
+    p Password : 
+    input(name="password" type="password")
+    br
+    button.submit signup
