@@ -20,6 +20,10 @@ var memberSchema = mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'Appointment'
   }],
+  schedules:[{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Schedule'
+  }],
   isFreeRider:{
     type:Boolean,
     default:false,

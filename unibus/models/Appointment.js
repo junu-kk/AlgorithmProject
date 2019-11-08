@@ -14,6 +14,22 @@ var appointmentSchema = mongoose.Schema({
   }],
   info:{
     type:String
+  },
+  plan:{
+    startDate:{
+      type:Date,
+    },
+    endDate:{
+      type:Date
+    },
+    schedules:[{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Schedule'
+    }],
+  },
+  is_fixed:{
+    type:Boolean,
+    default:false
   }
 });
 

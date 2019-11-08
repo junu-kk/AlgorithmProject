@@ -11,11 +11,15 @@ var postSchema=mongoose.Schema({
     type:Date,
     default:Date.now,
   },
-  by:{
+  team:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Team',
+  },
+  posted_by:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Member'
   },
-  likes:[{
+  views_by:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Member'
   }],

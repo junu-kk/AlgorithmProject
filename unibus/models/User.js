@@ -33,11 +33,7 @@ var userSchema=mongoose.Schema({
   members:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Member'
-  }],
-  timetable:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Timetable'
-  },
+  }]
 });
 
 userSchema.methods = {

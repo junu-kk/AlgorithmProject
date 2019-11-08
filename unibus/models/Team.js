@@ -15,7 +15,7 @@ var teamSchema=mongoose.Schema({
   },
   members:[{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'User'
+    ref:'Member'
   }],
   name:{
     type:String,
