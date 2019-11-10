@@ -1,4 +1,16 @@
-extends layout
+extends layout_student
 
 block content
-  h2 메인페이지
+  h2 학생 메인페이지
+  //강의가 없는 경우
+  -if(user.classes.length==0)
+    p 새로운 강의에 등록하세요!
+    form(action='/main/enroll' method='POST')
+      p 강의코드 : 
+      input(type='text' name='_id')
+      br
+      br
+      button.submit 등록
+  //강의가 있는 경우
+  //-else
+  

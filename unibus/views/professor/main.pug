@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  h2 교수 메인페이지
+  //-console.log(user.classes)
+  -for(var i=0;i<user.classes.length;i++)
+    a(href="/professor/class/"+user.classes[i]._id) #{user.classes[i].name}
+  br
+  br
+  a(href="/professor/class/create") 강의개설
+

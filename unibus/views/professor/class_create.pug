@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  form(action='/professor/class/create' method='POST')
+    p 강의명 : 
+    input(type='text' name='name')
+    p 강의 세부설명 : 
+    input(type='text' name='info')
+    br
+    br
+    button.submit 강의개설

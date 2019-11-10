@@ -12,10 +12,8 @@ var library={
 var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/authentication/login');
-var signupRouter = require('./routes/authentication/signup');
-var logoutRouter = require('./routes/authentication/logout');
 var mainRouter = require('./routes/main');
+var professorRouter = require('./routes/professor');
 
 var app = express();
 
@@ -40,11 +38,8 @@ app.use(passport.session());
 app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/logout', logoutRouter);
-app.use('/signup', signupRouter);
 app.use('/main', mainRouter);
-
+app.use('/professor', professorRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,7 +47,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

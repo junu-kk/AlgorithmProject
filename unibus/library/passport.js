@@ -56,7 +56,8 @@ module.exports = function(){
         newUser.sid = req.body.sid;
         newUser.email = email;
         newUser.password = password;
-
+        newUser.type = req.body.type;
+        
         newUser.save(function(err){
           if(err){
             console.log(err);

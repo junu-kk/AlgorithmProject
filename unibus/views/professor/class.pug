@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  -console.log(classs)
+  p #{classs.name}
+  p #{classs.info}
+  br
+  br
+  p 학생명단
+  -for(var i=0;i<classs.students.length;i++)
+    p #{classs.students[i].name}
+  p 등록코드 : #{classs._id}
+  a(href='/professor/class/'+classs._id+'/team/create') 팀 짜기
