@@ -42,7 +42,7 @@ router.get('/', (req,res)=>{
 router.get('/class/:id', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     //이름충돌 때문에 class 대신 classs씀.
-    Class.findOne({_id:req.params.id}).populate('students').exec((err,classs)=>{
+    Class.findById(req.params.id).populate('students').exec((err,classs)=>{
       if(err) throw err;
       return res.render('professor/class',{
         classs:classs
@@ -53,7 +53,7 @@ router.get('/class/:id', (req,res)=>{
 
 router.get('/class/create', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    return res.render('professor/class_create');
+    res.render('professor/class_create');
   });
 });
 
@@ -82,9 +82,18 @@ router.get('/class/:id/team/create', (req,res)=>{
     Class.findById(req.params.id).populate('students').exec((err,classs)=>{
       if(err) throw err;
       res.render('professor/team_create',{
-        students:classs.students
+        classs:classs
       });
     });
+  });
+});
+
+router.post('/class/:id/team/create', (req,res)=>{
+  authCheck(req.res,(req,res,user)=>{
+    //user마다 member를 만들고
+    //member가 모인 team을 만든다.
+    console.log(req.body);
+    res.redirect('/professor');
   });
 });
 
