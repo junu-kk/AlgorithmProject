@@ -4,7 +4,7 @@ block content
   p #{classs.name} 수업의 팀을 생성합니다.
   p 각각 몇 조에 들어갈지 나누어주세요.
   br
-  form(action='professor/class/'+classs._id+'/team/create')
+  form(action='/professor/class/'+classs._id+'/team/create' method='POST')
     -for(var i=0;i<classs.students.length;i++)
       p #{classs.students[i].sid} #{classs.students[i].name}
       input(type='number' name=classs.students[i]._id)

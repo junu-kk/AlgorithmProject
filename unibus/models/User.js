@@ -27,11 +27,11 @@ var userSchema=mongoose.Schema({
     type:String,
   },
   classes:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Class'
   }],
   members:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   }]
 });

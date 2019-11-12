@@ -2,15 +2,15 @@ var mongoose = require('mongoose');
 
 var classSchema=mongoose.Schema({
   professor:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'User',
   },
   students:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'User',
   }],
   teams:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Team',
   }],
   name:{

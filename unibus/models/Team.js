@@ -2,30 +2,30 @@ var mongoose = require('mongoose');
 
 var teamSchema=mongoose.Schema({
   class:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Class'
   },
   leader:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   },
   freerider:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   },
   members:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   }],
   name:{
     type:String,
   },
   posts:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Post'
   }],
   appointments:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Appointment'
   }]
 });

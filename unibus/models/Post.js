@@ -12,20 +12,20 @@ var postSchema=mongoose.Schema({
     default:Date.now,
   },
   team:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Team',
   },
   posted_by:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   },
   views_by:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   }],
   comments:[{
     by:{
-      type:mongoose.Schema.Types.ObjectId,
+      type:mongoose.SchemaTypes.ObjectId,
       ref:'Member'
     },
     contents:{

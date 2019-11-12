@@ -5,11 +5,11 @@ var appointmentSchema = mongoose.Schema({
     default:Date.now,
   },
   team:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Team'
   },
   members:[{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   }],
   info:{
@@ -23,7 +23,7 @@ var appointmentSchema = mongoose.Schema({
       type:Date
     },
     schedules:[{
-      type:mongoose.Schema.Types.ObjectId,
+      type:mongoose.SchemaTypes.ObjectId,
       ref:'Schedule'
     }],
   },

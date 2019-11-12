@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 
 var scheduleSchema=mongoose.Schema({
   member:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   },
   appointment:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'Appointment'
   },
   time:[{

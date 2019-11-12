@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var timetableSchema=mongoose.Schema({
   user:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:mongoose.SchemaTypes.ObjectId,
     ref:'User'
   },
   mon:[{
