@@ -11,6 +11,7 @@ var memberSchema = mongoose.Schema({
   },
   point:{
     type:Number,
+    default:0,
   },
   posts:[{
     type:mongoose.SchemaTypes.ObjectId,

@@ -10,5 +10,9 @@ block content
   -for(var i=0;i<classs.students.length;i++)
     p #{classs.students[i].sid} #{classs.students[i].name}
   br
-  p 등록코드 : #{classs._id}
-  a(href='/professor/class/'+classs._id+'/team/create') 팀 짜기
+  -for(i=0;i<classs.teams.length;i++)
+    p #{classs.teams[i]}
+  br
+  -if(classs.team==undefined)
+    p 등록코드 : #{classs._id}
+    a(href='/professor/class/'+classs._id+'/team/create') 팀 짜기

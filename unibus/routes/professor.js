@@ -3,12 +3,17 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
 var Class = require('../models/Class');
+var Member = require('../models/Member');
+var Team = require('../models/Team');
 
-
-function authCheck(req, res, callback){
+function loginCheck(req,res){
   if(req.isUnauthenticated()){
     return res.redirect('/login');
   }
+}
+
+function authCheck(req, res, callback){
+  loginCheck(req,res);
   User.findOne({email:req.user.email}).populate('classes').exec((err,user)=>{
     if(err) throw err;
     if(user.type=="Student") return res.redirect('/main');
@@ -74,16 +79,103 @@ router.get('/class/:id/team/create', (req,res)=>{
 });
 
 router.post('/class/:id/team/create', (req,res)=>{
-  console.log(req.body);
-  res.redirect('/professor');
-  /*
-  authCheck(req.res,(req,res,user)=>{
-    //user마다 member를 만들고
-    //member가 모인 team을 만든다.
+  //post는 그냥 인증체크 다 뺄까보다.
+  
+  //현 클래스 찾기
+  Class.findById(req.params.id).exec((err,classs)=>{
+    if(err) throw err;
+  
     console.log(req.body);
-    res.redirect('/professor');
+    //팀이 겹치면 안되니까 teamList 생성
+    var teamList=[];
+
+    //8번반복
+    for(var i=0;i<Object.keys(req.body).length;i++){
+      //키는 user._id이고
+      var key = Object.keys(req.body)[i];
+      //value는 팀넘버와 리더여부를 담고있음. teamNumber와 isLeader로 쪼개주자.
+      var value = req.body[key];
+      var teamNumber;
+      var isLeader;
+      if(Array.isArray(value)){
+        teamNumber = value[0];
+        isLeader = true;
+      } else{
+        teamNumber = value;
+        isLeader = false;
+      }
+      
+      //key로 해당 user를 찾은 뒤
+      User.findById(key).exec((err,keyuser)=>{
+        if(err) throw err;
+        //멤버를 만들자.
+        //user, team, isLeader 넣어주고 save해야함.
+        var newMember = new Member();
+        newMember.user = keyuser._id;
+        if(isLeader){
+          newMember.isLeader = true;  
+        }
+        
+        
+        //기존에 존재하는 팀 vs 새로 만드는 팀
+        //새로 만드는 경우 class, teamNumber 넣어줘야 하고 save해야하고
+        //기존에 있는 경우 leader와 members 해주면됨.
+        if(teamList.includes(teamNumber)){
+          console.log(teamList);
+          console.log('팀존재');
+          Team.findOne({class:classs._id,teamNumber:teamNumber}).exec((err,team)=>{
+            console.log(team);
+            if(err) throw err;
+            team.members.push(newMember._id);
+            newMember.team = team._id;
+            if(newMember.isLeader){
+              team.leader = newMember._id;
+            }
+            
+            team.saveTeam((err)=>{
+              console.log('기본팀저장완료');
+              if(err) throw err;
+            });
+            
+          });
+        } else{
+          console.log(teamList);
+          console.log('팀존재X');
+          teamList.push(teamNumber);
+          var newTeam = new Team();
+          newTeam.class = classs._id;
+          newTeam.teamNumber = teamNumber;
+          newTeam.members.push(newMember._id);
+          if(newMember.isLeader){
+            newTeam.leader = newMember._id;
+          }
+          newTeam.saveTeam((err)=>{
+            if(err) throw err;
+          });
+          classs.teams.push(newTeam._id);
+          
+          classs.saveClass((err)=>{
+            console.log('새로운팀저장완료');
+            if(err) throw err;
+          });
+          
+          
+        }
+
+        newMember.saveMember((err)=>{
+          if(err) throw err;
+        });
+        keyuser.members.push(newMember._id);
+        keyuser.saveUser((err)=>{
+          if(err) throw err;
+        });
+      });
+
+      
+    }
   });
-  */
+  res.redirect('/professor');
+  
 });
 
 module.exports = router;

@@ -5,6 +5,9 @@ var teamSchema=mongoose.Schema({
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Class'
   },
+  teamNumber:{
+    type:Number,
+  },
   leader:{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
