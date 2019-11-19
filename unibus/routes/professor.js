@@ -40,6 +40,7 @@ router.post('/class/create', (req,res)=>{
     var newClass = new Class();
     newClass.name=req.body.name;
     newClass.info=req.body.info;
+    newClass.professor = user._id;
     newClass.saveClass((err)=>{
       if(err) throw err;
     });
@@ -98,10 +99,10 @@ router.post('/class/:id/team/create', (req,res)=>{
       var teamNumber;
       var isLeader;
       if(Array.isArray(value)){
-        teamNumber = value[0];
+        teamNumber = Number(value[0]);
         isLeader = true;
       } else{
-        teamNumber = value;
+        teamNumber = Number(value);
         isLeader = false;
       }
       
@@ -121,10 +122,10 @@ router.post('/class/:id/team/create', (req,res)=>{
         //새로 만드는 경우 class, teamNumber 넣어줘야 하고 save해야하고
         //기존에 있는 경우 leader와 members 해주면됨.
         if(teamList.includes(teamNumber)){
-          console.log(teamList);
-          console.log('팀존재');
+          //console.log(teamList);
+          //console.log('팀존재');
           Team.findOne({class:classs._id,teamNumber:teamNumber}).exec((err,team)=>{
-            console.log(team);
+            console.log('팀찾음');
             if(err) throw err;
             team.members.push(newMember._id);
             newMember.team = team._id;
@@ -133,19 +134,20 @@ router.post('/class/:id/team/create', (req,res)=>{
             }
             
             team.saveTeam((err)=>{
-              console.log('기본팀저장완료');
+              //console.log('기본팀저장완료');
               if(err) throw err;
             });
             
           });
         } else{
-          console.log(teamList);
-          console.log('팀존재X');
+          //console.log(teamList);
+          //console.log('팀존재X');
           teamList.push(teamNumber);
           var newTeam = new Team();
           newTeam.class = classs._id;
           newTeam.teamNumber = teamNumber;
           newTeam.members.push(newMember._id);
+          newMember.team = newTeam._id;
           if(newMember.isLeader){
             newTeam.leader = newMember._id;
           }
@@ -155,7 +157,7 @@ router.post('/class/:id/team/create', (req,res)=>{
           classs.teams.push(newTeam._id);
           
           classs.saveClass((err)=>{
-            console.log('새로운팀저장완료');
+            //console.log('새로운팀저장완료');
             if(err) throw err;
           });
           
