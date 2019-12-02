@@ -14,6 +14,7 @@ var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var mainRouter = require('./routes/main');
 var professorRouter = require('./routes/professor');
+var profileRouter = require('./routes/profile')
 
 var app = express();
 
@@ -30,6 +31,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //img middleware
+//app.use(methodOverride('_method'));
+//app.use(bodyParser.json());
+app.use('/image',express.static('./upload'));
 
 //authentication middleware
 app.use(session({secret:'@$!#!D1!@#%!(^)$@#', resave:true, saveUninitialized:false}));
@@ -40,6 +44,7 @@ app.use(flash());
 app.use('/', indexRouter);
 app.use('/main', mainRouter);
 app.use('/professor', professorRouter);
+app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

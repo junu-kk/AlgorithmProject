@@ -22,6 +22,7 @@ var userSchema=mongoose.Schema({
   },
   pic:{
     type:String,
+    default:'profile_pic'
   },
   sid:{
     type:String,
