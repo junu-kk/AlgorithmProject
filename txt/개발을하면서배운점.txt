@@ -1,2 +1,4 @@
 콜백함수 설계만 잘 하면 인증 함수 하나 만들어서 퉁칠수있다
 라우터 안의 순서 중요하다. :id 들어가는거는 나중에 넣자.
+ncu -u와 npm install로 dependencies 업데이트.
+req.user에 모든 user정보가 들어있어서, 굳이 User.findOne 안해도될듯??

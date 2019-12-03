@@ -8,6 +8,7 @@ function authCheck(req, res, callback){
   if(req.isUnauthenticated()){
     return res.redirect('/login');
   }
+  console.log(req.user);
   User.findOne({email:req.user.email}).exec((err,user)=>{
     if(err) throw err;
     if(user.type=="Professor") return res.redirect('/professor');

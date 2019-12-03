@@ -34,7 +34,11 @@ var userSchema=mongoose.Schema({
   members:[{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
-  }]
+  }],
+  idx:{
+    type:Number,
+    default:0
+  },
 });
 
 userSchema.methods = {
