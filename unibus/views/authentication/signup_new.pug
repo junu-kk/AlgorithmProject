@@ -1,0 +1,155 @@
+doctype html
+//
+  =========================================================
+  * Paper Dashboard PRO - V1.3.1
+  =========================================================
+  * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro
+  * Available with purchase of license from https://www.creative-tim.com/product/paper-dashboard-pro
+  * Copyright 2017 Creative Tim (https://www.creative-tim.com)
+  * License Creative Tim (https://www.creative-tim.com/license)
+  =========================================================
+head
+  meta(charset='utf-8')
+  link(rel='apple-touch-icon' sizes='76x76' href='../../assets/img/icon-social.png')
+  link(rel='icon' type='image/png' sizes='96x96' href='../../assets/img/icon-social.png')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+  title Unibus for the better world
+  meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport')
+  meta(name='viewport' content='width=device-width')
+  // Bootstrap core CSS
+  link(href='../../assets/css/bootstrap.min.css' rel='stylesheet')
+  // Paper Dashboard core CSS
+  link(href='../../assets/css/paper-dashboard.css' rel='stylesheet')
+  // CSS for Demo Purpose, don't include it in your project
+  link(href='../../assets/css/demo.css' rel='stylesheet')
+  // Fonts and icons
+  link(href='https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css')
+  link(href='../../assets/css/themify-icons.css' rel='stylesheet')
+nav.navbar.navbar-transparent.navbar-absolute
+  .container
+    .navbar-header
+      button.navbar-toggle.navbar-toggle-black(type='button' data-toggle='collapse' data-target='#navigation-example-2')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a.btn(href='/login')
+            | Login
+.wrapper.wrapper-full-page
+  .register-page
+    // you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple"
+    .content
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            .header-text
+              h2 UNIBUS
+              h4 Register for free and experience clean team project today.
+              hr
+          .col-md-4.col-md-offset-2
+            .media
+              .media-left
+                .icon.icon-danger
+                  i.ti.ti-user
+              .media-body
+                h5 &#xBB34;&#xB8CC;&#xB85C; &#xAE30;&#xB2A5; &#xC81C;&#xACF5;
+                |                                 &#x9;&#xC5EC;&#xB7EC;&#xBD84;&#xB4E4;&#xC758; &#xB6F0;&#xC5B4;&#xB098;&#xACE0; &#xCC3D;&#xC758;&#xC801;&#xC778; &#xD300; &#xD504;&#xB85C;&#xC81D;&#xD2B8;&#xC758; &#xACB0;&#xACFC;&#xB97C; &#xC704;&#xD55C; &#xD658;&#xACBD;&#xC744; &#xBB34;&#xB8CC;&#xB85C; &#xC81C;&#xACF5;&#xD569;&#xB2C8;&#xB2E4;!
+            .media
+              .media-left
+                .icon.icon-warning
+                  i.ti-bar-chart-alt
+              .media-body
+                h5 &#xC810;&#xC218; &#xBD80;&#xC5EC; &#xAE30;&#xB2A5;
+                |                                 &#x9;&#xC774; &#xC6F9; &#xBE0C;&#xB77C;&#xC6B0;&#xC800;&#xB294; &#xAC01; &#xD300;&#xC6D0;&#xB4E4;&#xC758; &#xC810;&#xC218;&#xB97C; &#xB9E4;&#xACA8;&#xC90D;&#xB2C8;&#xB2E4;. &#xB204;&#xAD6C;&#xBCF4;&#xB2E4; &#xC5F4;&#xC758;&#xB97C; &#xAC00;&#xC9C4;&#xB2E4;&#xBA74; &#xB192;&#xC740; &#xC810;&#xC218;&#xB97C; &#xD68D;&#xB4DD;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;!
+            .media
+              .media-left
+                .icon.icon-info
+                  i.ti-headphone
+              .media-body
+                h5 &#xD300;&#xD50C; &#xC77C;&#xC815; &#xC9DC;&#xC8FC;&#xB294; &#xAE30;&#xB2A5;
+                |                                 &#x9;&#xAC01; &#xD300;&#xC6D0;&#xB4E4;&#xC758; &#xC77C;&#xC815;&#xACFC; &#xC870; &#xC9C4;&#xD589; &#xC0C1;&#xD669;&#xC5D0; &#xB530;&#xB77C; &#xD300; &#xBAA8;&#xC784; &#xB0A0;&#xC9DC;&#xB97C; &#xCD94;&#xCC9C;&#xD574;&#xC90D;&#xB2C8;&#xB2E4;!
+          .col-md-4
+            form(method='POST' action='/signup')
+              .card.card-plain
+                .content
+                  .form-group
+                    input.form-control(name='name' type='text' placeholder='이름')
+                  .form-group
+                    input.form-control(name='sid' type='text' placeholder='학번 혹은 교번')
+                  //
+                    <div class="form-group">
+                    <input type="email" placeholder="Company" class="form-control">
+                    </div>
+                  .form-group
+                    input.form-control(name='email' type='email' placeholder='이메일 주소')
+                  .form-group
+                    input.form-control(name='password' type='password' placeholder='비밀번호')
+                  .form-group
+                    input.form-control(name='password_check' type='password' placeholder='비밀번호 확인')
+                  .form-group
+                    | &#xD559;&#xC0DD;: 
+                    input(type='radio' name='type' value='student')
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xAD50;&#xC218;: 
+                    input(type='radio' name='type' value='professor')
+                .footer.text-center
+                  button.btn.btn-fill.btn-danger.btn-wd(type='submit') Register
+    footer.footer.footer-transparent
+      .container
+        .copyright.text-center
+          | &copy; 
+          script.
+            document.write(new Date().getFullYear())
+          | , made by &#xD0D0;&#xD06C;&#xB8E8;&#xC988;
+// Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js
+script(src='../../assets/js/jquery.min.js' type='text/javascript')
+script(src='../../assets/js/jquery-ui.min.js' type='text/javascript')
+script(src='../../assets/js/perfect-scrollbar.min.js' type='text/javascript')
+script(src='../../assets/js/bootstrap.min.js' type='text/javascript')
+// Forms Validations Plugin
+script(src='../../assets/js/jquery.validate.min.js')
+// Promise Library for SweetAlert2 working on IE
+script(src='../../assets/js/es6-promise-auto.min.js')
+// Plugin for Date Time Picker and Full Calendar Plugin
+script(src='../../assets/js/moment.min.js')
+// Date Time Picker Plugin is included in this js file
+script(src='../../assets/js/bootstrap-datetimepicker.js')
+// Select Picker Plugin
+script(src='../../assets/js/bootstrap-selectpicker.js')
+// Switch and Tags Input Plugins
+script(src='../../assets/js/bootstrap-switch-tags.js')
+// Circle Percentage-chart
+script(src='../../assets/js/jquery.easypiechart.min.js')
+// Charts Plugin
+script(src='../../assets/js/chartist.min.js')
+// Notifications Plugin
+script(src='../../assets/js/bootstrap-notify.js')
+// Sweet Alert 2 plugin
+script(src='../../assets/js/sweetalert2.js')
+// Vector Map plugin
+script(src='../../assets/js/jquery-jvectormap.js')
+// Google Maps Plugin
+script(src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE')
+// Wizard Plugin
+script(src='../../assets/js/jquery.bootstrap.wizard.min.js')
+// Bootstrap Table Plugin
+script(src='../../assets/js/bootstrap-table.js')
+// Plugin for DataTables.net
+script(src='../../assets/js/jquery.datatables.js')
+// Full Calendar Plugin
+script(src='../../assets/js/fullcalendar.min.js')
+// Paper Dashboard PRO Core javascript and methods for Demo purpose
+script(src='../../assets/js/paper-dashboard.js')
+// Paper Dashboard PRO DEMO methods, don't include it in your project!
+script(src='../../assets/js/demo.js')
+script(type='text/javascript').
+  $().ready(function(){
+  demo.checkFullPageBackgroundImage();
+  setTimeout(function(){
+  // after 1000 ms we add the class animated to the login/register card
+  $('.card').removeClass('card-hidden');
+  }, 700)
+  });

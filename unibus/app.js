@@ -16,6 +16,7 @@ var mainRouter = require('./routes/main');
 var professorRouter = require('./routes/professor');
 var profileRouter = require('./routes/profile');
 var teamRouter = require('./routes/team');
+var scheduleRouter = require('./routes/schedule');
 
 var app = express();
 
@@ -47,10 +48,12 @@ app.use('/main', mainRouter);
 app.use('/professor', professorRouter);
 app.use('/profile', profileRouter);
 app.use('/team', teamRouter);
+app.use('/schedule', scheduleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+  console.log('merong');
 });
 
 // error handler

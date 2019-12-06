@@ -5,7 +5,7 @@ var User = require('../models/User');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'unibus' });
+  res.render('index_new', { title: 'unibus' });
 });
 
 //for login page
@@ -15,7 +15,7 @@ router.get('/login', (req,res)=>{
   if(fmsg.error){
     feedback = fmsg.error[0];
   }
-  return res.render('authentication/login',{
+  return res.render('authentication/login_new',{
     feedback:feedback,
   });
 });
@@ -46,7 +46,7 @@ router.get('/signup', (req,res)=>{
   if(fmsg.error){
     feedback = fmsg.error[0];
   }
-  return res.render('authentication/signup',{
+  return res.render('authentication/signup_new',{
     feedback:feedback,
   });
 });
