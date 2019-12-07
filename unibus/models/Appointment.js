@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+
 var appointmentSchema = mongoose.Schema({
   date:{
     type:Date,
@@ -8,13 +9,14 @@ var appointmentSchema = mongoose.Schema({
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Team'
   },
-  members:[{
+  users:[{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User'
   }],
   info:{
     type:String
   },
+  //시작시간 9시 끝나는시간 12시
   plan:{
     startDate:{
       type:Date,

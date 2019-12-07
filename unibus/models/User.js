@@ -27,18 +27,42 @@ var userSchema=mongoose.Schema({
   sid:{
     type:String,
   },
-  classes:[{
+  class:{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Class'
-  }],
-  members:[{
-    type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
-  }],
-  idx:{
-    type:Number,
-    default:0
   },
+  //여기부터는 member에서 넘어온 값들
+  team:{
+    type:mongoose.SchemaTypes.ObjectId,
+    ref:'Team'
+  },
+  point:{
+    type:Number,
+    default:0,
+  },
+  posts:[{
+    type:mongoose.SchemaTypes.ObjectId,
+    ref:'Post',
+    default:[]
+  }],
+  appointments:[{
+    type:mongoose.SchemaTypes.ObjectId,
+    ref:'Appointment',
+    default:[]
+  }],
+  schedules:[{
+    type:mongoose.SchemaTypes.ObjectId,
+    ref:'Schedule',
+    default:[]
+  }],
+  isFreeRider:{
+    type:Boolean,
+    default:false,
+  },
+  isLeader:{
+    type:Boolean,
+    default:false,
+  }
 });
 
 userSchema.methods = {

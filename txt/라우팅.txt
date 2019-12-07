@@ -11,11 +11,11 @@
   일정
     생성하기 : /schedule/create
     입력하기 : /schedule/input
-  프리라이더를 찾아라! : /freerider
+  프리라이더를 찾아라! : /team/freerider
   팀정보 : /team
 
-교수(/professor)
-  프로필 : /profile
-  메인페이지 : /class
-  강의개설 : /class/create
-  데이터 출력 : /result
+교수
+  프로필 : /professor/profile
+  메인페이지 : /professor/class
+  강의개설 : /professor/class/create
+  데이터 출력 : /professor/result

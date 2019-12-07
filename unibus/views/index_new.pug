@@ -1,6 +1,7 @@
 doctype html
 head
   include includes/head
+//별도의 nav바
 nav.navbar.navbar-transparent.navbar-absolute
   .container
     .navbar-header
@@ -28,6 +29,7 @@ nav.navbar.navbar-transparent.navbar-absolute
                 h3.idx-btn
                   a(href='/signup') &#xD68C;&#xC6D0;&#xAC00;&#xC785;
                   br
+    //별도의 footer
     footer.footer.footer-transparent
       .container
         .copyright
@@ -35,7 +37,6 @@ nav.navbar.navbar-transparent.navbar-absolute
           script.
             document.write(new Date().getFullYear())
           | , made by &#xD0D0;&#xD06C;&#xB8E8;&#xC988;
-// Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js
 include includes/scripts
 script(type='text/javascript').
   $().ready(function(){

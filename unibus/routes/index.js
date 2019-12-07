@@ -5,26 +5,18 @@ var User = require('../models/User');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index_newnew');
+  res.render('index_new');
 });
 
 //for login page
 router.get('/login', (req,res)=>{
-  var fmsg = req.flash();
-  var feedback = '';
-  if(fmsg.error){
-    feedback = fmsg.error[0];
-  }
-  return res.render('authentication/login_new',{
-    feedback:feedback,
-  });
+  res.render('authentication/login_new');
 });
 
 //for login procedure
 router.post('/login', passport.authenticate('local-login',{
   //successRedirect:'/',
   failureRedirect:'/login',
-  failureFlash:true,
 }), (req,res)=>{
   User.findOne({email:req.user.email}, (err,user)=>{
     if(err) throw err;
@@ -41,20 +33,12 @@ router.get('/logout', (req,res)=>{
 
 //for signup page
 router.get('/signup', (req,res)=>{
-  var fmsg = req.flash();
-  var feedback = '';
-  if(fmsg.error){
-    feedback = fmsg.error[0];
-  }
-  return res.render('authentication/signup_new',{
-    feedback:feedback,
-  });
+  return res.render('authentication/signup_new');
 });
 
 //for signup procedure
 router.post('/signup', passport.authenticate('local-signup',{
   failureRedirect:'/signup',
-  failureFlash:true,
   successRedirect:'/',
 }));
 

@@ -1,0 +1,17 @@
+extends layout_professor
+
+block content
+  h2 프로필 페이지
+  style.
+    img{
+      width:10%
+    }
+  form(action='/profile/upload' method='POST' enctype='multipart/form-data')
+    input(type='file' name='file')
+    label(for='file') Choose file
+    input(type='submit' value='submit')
+    img(src=user.pic alt='')
+  p 이름 : #{user.name}
+  p 이메일 : #{user.email}
+  p 회원 구분 : #{user.type}
+  p 교번 : #{user.sid}

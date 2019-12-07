@@ -1,29 +1,28 @@
 var express = require('express');
 var router= express.Router();
-var User = require('../models/User');
-var Member = require('../models/Member');
+//var User = require('../models/User');
+//var Member = require('../models/Member');
 var Team = require('../models/Team')
+
+
 
 router.get('/', (req,res)=>{
   if(req.isUnauthenticated()){
     res.redirect('/login');
   }
-  Member.findOne({_id:req.user.members[0]}).exec((err,member)=>{
+  Team.findOne({_id:req.user.team}).exec((err,team)=>{
     if(err) throw err;
-    Team.findOne({_id:member.team}).exec((err,team)=>{
-      if(err) throw err;
-      if(member.isLeader==true){
-        res.render('team_leader',{
-          team:team
-        });
-      } else if(team.members.includes(member._id)){
-        res.render('team_member', {
-          team:team
-        });
-      } else{
-        res.redirect('/main');
-      }
-    });
+    if(req.user._id==team.leader){
+      return res.render('student/team_leader',{
+        team:team
+      });
+    }
+    if(req.user.isLeader==false){
+      return res.render('student/team_member', {
+        team:team
+      });
+    }
+    res.redirect('/main');
   });
 });
 

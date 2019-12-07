@@ -1,31 +1,43 @@
 //router of professor page
 var express = require('express');
 var router = express.Router();
-var User = require('../models/User');
+//var User = require('../models/User');
 var Class = require('../models/Class');
-var Member = require('../models/Member');
-var Team = require('../models/Team');
+//var Team = require('../models/Team');
+var multer = require('multer');
+var upload = multer({dest:'./upload'});
 
-function loginCheck(req,res){
-  if(req.isUnauthenticated()){
-    return res.redirect('/login');
-  }
-}
 
 function authCheck(req, res, callback){
-  loginCheck(req,res);
-  User.findOne({email:req.user.email}).populate('classes').exec((err,user)=>{
-    if(err) throw err;
-    if(user.type=="Student") return res.redirect('/main');
-    if(user.type=="Professor") callback(req,res,user);
-  });
+  if(req.isUnauthenticated()) return res.redirect('/login');
+  if(req.user.type=="Student") return res.redirect('/main');
+  if(req.user.type=="Professor") callback(req,res,req.user);
 }
 
 router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    return res.render('professor/main',{
+    res.render('professor/main',{
       user:user
     });
+  });
+});
+
+router.get('/profile', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    res.render('professor/profile', {
+      user:user
+    });
+  });
+});
+
+router.post('/profile/upload', upload.single('file'), (req, res, next) => {
+  let image='/image/'+req.file.filename;
+  authCheck(req,res,(req,res,user)=>{
+    user.pic = image;
+    user.saveUser((err)=>{
+      if(err) throw err;
+    });
+    res.redirect('/profile');
   });
 });
 
@@ -44,7 +56,7 @@ router.post('/class/create', (req,res)=>{
     newClass.saveClass((err)=>{
       if(err) throw err;
     });
-    user.classes.push(newClass._id);
+    user.class=newClass._id;
     user.saveUser((err)=>{
       if(err) throw err;
     });
@@ -53,24 +65,21 @@ router.post('/class/create', (req,res)=>{
 })
 
 
-router.get('/class/:id', (req,res)=>{
+router.get('/class', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     //이름충돌 때문에 class 대신 classs씀.
-    Class.findById(req.params.id).populate({path:'students',populate:{path:'members', populate:{path:'team'}}}).exec((err,classs)=>{
+    Class.findById(user.class).populate('students').exec((err,classs)=>{
       if(err) throw err;
-      return res.render('professor/class_new',{
+      res.render('professor/class_new', {
         classs:classs
       });
     });
   });
 });
-router.get('/class/:id/team', (req,res)=>{
 
-});
-
-router.get('/class/:id/team/create', (req,res)=>{
+router.get('/class/create_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    Class.findById(req.params.id).populate('students').exec((err,classs)=>{
+    Class.findById(user.class).populate('students').exec((err,classs)=>{
       if(err) throw err;
       res.render('professor/team_create',{
         classs:classs
@@ -79,7 +88,9 @@ router.get('/class/:id/team/create', (req,res)=>{
   });
 });
 
-router.post('/class/:id/team/create', (req,res)=>{
+//항상 오류나는 부분. 구현예정.
+/*
+router.post('/class/create_team', (req,res)=>{
   //post는 그냥 인증체크 다 뺄까보다.
   
   //현 클래스 찾기
@@ -179,5 +190,6 @@ router.post('/class/:id/team/create', (req,res)=>{
   res.redirect('/professor');
   
 });
+*/
 
 module.exports = router;

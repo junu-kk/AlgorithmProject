@@ -1,23 +1,21 @@
 var mongoose = require('mongoose');
 
 var scheduleSchema=mongoose.Schema({
-  member:{
+  user:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User'
   },
   appointment:{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Appointment'
   },
   time:[{
-    day:[{
-      startTime:{
-        type:Date,
-      },
-      endTime:{
-        type:Date
-      }
-    }]
+    start:{
+      type:Date
+    },
+    end:{
+      type:Date
+    }
   }]
 });
 

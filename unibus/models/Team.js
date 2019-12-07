@@ -10,19 +10,16 @@ var teamSchema=mongoose.Schema({
   },
   leader:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User'
   },
   freerider:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User',
   },
   members:[{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   }],
-  name:{
-    type:String,
-  },
   posts:[{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Post'
