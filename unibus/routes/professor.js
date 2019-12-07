@@ -1,9 +1,9 @@
 //router of professor page
 var express = require('express');
 var router = express.Router();
-//var User = require('../models/User');
+var User = require('../models/User');
 var Class = require('../models/Class');
-//var Team = require('../models/Team');
+var Team = require('../models/Team');
 var multer = require('multer');
 var upload = multer({dest:'./upload'});
 
@@ -14,13 +14,25 @@ function authCheck(req, res, callback){
   if(req.user.type=="Professor") callback(req,res,req.user);
 }
 
+
+
 router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    res.render('professor/main',{
-      user:user
-    });
+    if(!user.class) return res.redirect('/professor/create_class');
+
+    Class.findById(user.class).exec((err,classs)=>{
+      if(err) throw err;
+      if(!classs.team){
+        return res.redirect('professor/create_team');
+      }
+      res.render('professor/main_new',{
+        user:user,
+        classs:classs
+      })
+    })
   });
 });
+
 
 router.get('/profile', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
@@ -41,52 +53,86 @@ router.post('/profile/upload', upload.single('file'), (req, res, next) => {
   });
 });
 
-router.get('/class/create', (req,res)=>{
+router.get('/create_class', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    res.render('professor/class_create');
+    res.render('professor/class_create_new',{
+      user:user,
+    });
   });
 });
 
-router.post('/class/create', (req,res)=>{
+router.post('/create_class', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     var newClass = new Class();
     newClass.name=req.body.name;
-    newClass.info=req.body.info;
+    newClass.class_id=req.body.class_id;
+    newClass.year=req.body.year;
+    newClass.semester=req.body.semester;
+    
     newClass.professor = user._id;
     newClass.saveClass((err)=>{
       if(err) throw err;
     });
-    user.class=newClass._id;
-    user.saveUser((err)=>{
+    User.findById(user._id).exec((err,user)=>{
       if(err) throw err;
+      user.class=newClass._id;
+      user.saveUser((err)=>{
+        if(err) throw err;
+      });
+      // class가 저장되는데 좀 시간이 걸리므로, 프로페서로 바로 가면 안됨.
+      res.redirect('/logout');
     });
-    res.redirect('/professor');
   });
 })
 
-
-router.get('/class', (req,res)=>{
+router.get('/create_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    //이름충돌 때문에 class 대신 classs씀.
     Class.findById(user.class).populate('students').exec((err,classs)=>{
       if(err) throw err;
-      res.render('professor/class_new', {
+      res.render('professor/team_create_new', {
+        user:user,
         classs:classs
       });
     });
   });
 });
 
-router.get('/class/create_team', (req,res)=>{
+// 
+
+router.post('/create_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    Class.findById(user.class).populate('students').exec((err,classs)=>{
+    Class.findById(user.class).exec((err,classs)=>{
       if(err) throw err;
-      res.render('professor/team_create',{
-        classs:classs
+      //console.log(req.body[classs.students[0]]);
+      //console.log(req.body[classs.students[0]][0]);
+      //console.log(req.body[classs.students[0]][1]);
+      
+      var newTeam = new Team();
+      newTeam.teamNumber = req.body[classs.students[0]][0];
+      for(var i=0;i<classs.students.length;i++){
+        //console.log(req.body[classs.students[i]])
+        User.findById(classs.students[i]).exec((err,user)=>{
+          if(err) throw err;
+          user.team = newTeam._id;
+          if(req.body[user._id][1]){
+            user.isLeader=true;
+            //newTeam.leader=user._id;
+          }
+          //newTeam.members.push(user._id);
+          user.saveUser((err)=>{
+            if(err) throw err;
+          });
+          
+        });
+      }
+      newTeam.saveTeam((err)=>{
+        if(err) throw err;
       });
+      
     });
-  });
-});
+    res.redirect('/professor');
+  })
+})
 
 //항상 오류나는 부분. 구현예정.
 /*

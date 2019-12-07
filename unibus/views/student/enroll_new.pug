@@ -1,0 +1,21 @@
+doctype html
+
+head
+  include ../includes/head
+.wrapper
+  include ../includes/sidebar_student
+  .main-panel
+    include ../includes/navbar
+  .content
+    .col-md-12
+      .card
+        .card-header
+          p 새로운 강의에 등록하세요!
+        .card-content
+          form(action='/main/enroll' method='POST')
+            p 강의코드 :
+            input(type='text' name='_id')
+            button.submit 등록
+
+    include ../includes/footer
+include ../includes/scripts

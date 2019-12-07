@@ -16,9 +16,16 @@ var classSchema=mongoose.Schema({
   name:{
     type:String,
   },
-  info:{
+  class_id:{
     type:String,
   },
+  year:{
+    type:Number,
+  },
+  semester:{
+    type:String,
+    enum:['1학기', '2학기', '여름계절', '겨울계절']
+  }
 });
 
 classSchema.methods={

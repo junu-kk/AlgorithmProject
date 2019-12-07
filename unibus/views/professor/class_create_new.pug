@@ -1,85 +1,53 @@
 doctype html
-//손봐야함! include만 해줌.
+
 head
   include ../includes/head
-
 .wrapper
   include ../includes/sidebar_professor
   .main-panel
     include ../includes/navbar
     .content
       .container-fluid
-        .card
-          .card-content.card.col-md-8.col-md-offset-2
-            .row
-              h1#class-name.card-title &#x300E;&#xC18C;&#xD504;&#xD2B8;&#xC6E8;&#xC5B4;&#xACF5;&#xD559;&#x300F;
-              .student-list
-                h2.table-title
-                  | &#xD559;&#xC0DD;&#xBA85;&#xB2E8;
-                form(action='index.html')
-                  .card-content.table-responsive.table-full-width
-                    .table.table-striped
-                      table
-                        thead
-                          tr
-                            td &#xC870;
-                            td &#xD559;&#xBC88;
-                            td &#xC774;&#xB984;
-                            td &#xC870;&#xC7A5; &#xC5EC;&#xBD80;
-                            td &#xC774;&#xBA54;&#xC77C;
-                        tbody
-                          tr
-                            td
-                              input(type='number' name='number' value='0')
-                            td 2016310220
-                            td &#xC6B0;&#xACBD;&#xCC2C;
-                            td
-                              select.is-leader(name='1')
-                                option(value='true') O
-                                option(value='false' selected='') X
-                            td wkc1002@naver.com
-                          tr
-                            td
-                              input(type='number' name='number' value='0')
-                            td 2016312924
-                            td &#xAC15;&#xC900;&#xC6B0;
-                            td
-                              select.is-leader(name='2')
-                                option(value='true') O
-                                option(value='false' selected='') X
-                            td originalKang@naver.com
-                          tr
-                            td
-                              input(type='number' name='number' value='0')
-                            td 2016311414
-                            td &#xAD8C;&#xC2E0;&#xD604;
-                            td
-                              select.is-leader(name='3')
-                                option(value='true') O
-                                option(value='false' selected='') X
-                            td junewookang@naver.com
-                          tr
-                            td
-                              input(type='number' name='number' value='0')
-                            td 2016311515
-                            td &#xC131;&#xC81C;&#xD604;
-                            td
-                              select.is-leader(name='4')
-                                option(value='true') O
-                                option(value='false' selected='') X
-                            td james0704@naver.com
-                          tr
-                            td
-                              input(type='number' name='number' value='0')
-                            td 2016311616
-                            td &#xAE40;&#xC0C1;&#xD654;
-                            td
-                              select.is-leader(name='5')
-                                option(value='true') O
-                                option(value='false' selected='') X
-                            td nagoo2@gmail.com
-                  div
-                    input#register-btn.btn.btn-info.btn-fill.btn-wd(type='submit' value='팀 등록하기')
-                    // <a id="register-btn" href="소프트웨어공학-open.html"><b>등록하기</b></a>
+        .col-md-12
+          .card
+            .card-header
+              h4.card-title &#xAC15;&#xC758;&#xB97C; &#xAC1C;&#xC124;&#xD569;&#xB2C8;&#xB2E4;.
+            .card-content
+              form.form-horizontal(method='POST' action='/professor/create_class')
+                .form-group
+                  label.col-sm-2.control-label &#xAC15;&#xC758; &#xC81C;&#xBAA9;
+                  .col-sm-9
+                    input.form-control(type='text' name='name')
+                .form-group
+                  label.col-sm-2.control-label &#xC218;&#xC5C5;&#xBC88;&#xD638;
+                  .col-sm-9
+                    input.form-control(type='text' name='class_id')
+                .form-group
+                  label.col-sm-2.control-label &#xAC1C;&#xC124;&#xB144;&#xB3C4;
+                  .col-sm-10
+                    input.form-control.create-class-year(type='number' name='year' value='2019')
+                .form-group
+                  label.col-sm-2.control-label &#xAC1C;&#xC124;&#xD559;&#xAE30;
+                  .col-sm-10
+                    .radio
+                      input#radio1(type='radio' name='semester' value='1학기')
+                      label(for='radio1')
+                        | 1&#xD559;&#xAE30;
+                    .radio
+                      input#radio2(type='radio' name='semester' value='2학기')
+                      label(for='radio2')
+                        | 2&#xD559;&#xAE30;
+                    .radio
+                      input#radio3(type='radio' name='semester' value='여름계절')
+                      label(for='radio3')
+                        | &#xC5EC;&#xB984;&#xACC4;&#xC808;
+                    .radio
+                      input#radio4(type='radio' name='semester' value='겨울계절')
+                      label(for='radio4')
+                        | &#xACA8;&#xC6B8;&#xACC4;&#xC808;
+                .text-center
+                  button.btn.btn-info.btn-fill.btn-wd(type='submit') &#xAC15;&#xC758; &#xAC1C;&#xC124;&#xD558;&#xAE30;
+          // end card
+        // end col-md-12
     include ../includes/footer
 include ../includes/scripts

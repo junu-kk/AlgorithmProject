@@ -29,7 +29,7 @@ var userSchema=mongoose.Schema({
   },
   class:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Class'
+    ref:'Class',
   },
   //여기부터는 member에서 넘어온 값들
   team:{

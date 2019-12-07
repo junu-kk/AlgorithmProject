@@ -23,5 +23,9 @@ nav.navbar.navbar-default
                 p &#xB85C;&#xADF8;&#xC544;&#xC6C3;
             li.dropdown
               a.dropdown-toggle
-                i.ti-user
-                span.notification &#xAD50;&#xC218;&#xC790; &#xD398;&#xC774;&#xC9C0;
+                -if(user.type=='Professor')
+                  i.ti-user
+                  span.notification &#xAD50;&#xC218;&#xC790; &#xD398;&#xC774;&#xC9C0;
+                -if(user.type=='Student')
+                  i.ti-cup
+                  span.notification 점수: #{user.point}

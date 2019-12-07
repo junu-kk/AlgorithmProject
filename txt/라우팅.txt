@@ -16,6 +16,8 @@
 
 교수
   프로필 : /professor/profile
-  메인페이지 : /professor/class
-  강의개설 : /professor/class/create
+  메인페이지 : /professor
+    팀 만들어지기 이전 : /professor/create_team
+    팀 만들어진 이후 :  /professor
+  강의개설 : /professor/create_class
   데이터 출력 : /professor/result

@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var Class = require('../models/Class');
 var Post = require('../models/Post');
+var User = require('../models/User');
 
 function authCheck(req, res, callback){
   if(req.isUnauthenticated()) return res.redirect('/login');
@@ -13,12 +14,31 @@ function authCheck(req, res, callback){
 //shows main page
 router.get('/', (req, res)=> {
   authCheck(req,res,(req,res,user)=>{
+    if(!user.class) return res.redirect('/main/enroll');
+    if(!user.team) return res.redirect('/main/no_team');
     Post.find({team:user.team}).exec((err,posts)=>{
       if(err) throw err;
       res.render('student/main', {
         user:user,
         posts:posts,
       });
+    });
+  });
+});
+
+router.get('/no_team', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    res.render('student/no_team',{
+      user:user
+    });
+  });
+});
+
+router.get('/enroll', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    //경찬이 완성되면 enroll_new로 바꿀것.
+    res.render('student/enroll', {
+      user:user
     });
   });
 });
@@ -31,13 +51,16 @@ router.post('/enroll', (req,res)=>{
         console.log(err);
         throw err;
       }
-      user.classes.push(req.body._id);
-      classs.students.push(user._id);
-      user.saveUser((err)=>{
+      User.findById(req.user._id).exec((err,user)=>{
         if(err) throw err;
-      });
-      classs.saveClass((err)=>{
-        if(err) throw err;
+        user.class = req.body._id;
+        classs.students.push(user._id);
+        user.saveUser((err)=>{
+          if(err) throw err;
+        });
+        classs.saveClass((err)=>{
+          if(err) throw err;
+        });
       });
       res.redirect('/main');
     });

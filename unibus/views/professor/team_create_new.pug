@@ -1,0 +1,49 @@
+doctype html
+
+head
+  include ../includes/head
+.wrapper
+  include ../includes/sidebar_professor
+  .main-panel
+    include ../includes/navbar
+    .content
+      .container-fluid
+        .card
+          .card-content.card.col-md-8.col-md-offset-2
+            .row
+              h1#class-name.card-title &#x300E;#{classs.name}&#x300F;
+              .student-list
+                h2.table-title
+                  | &#xD559;&#xC0DD;&#xBA85;&#xB2E8;
+                form(action='/professor/create_team' method='POST')
+                  .card-content.table-responsive.table-full-width
+                    p 과목코드 : #{classs._id}
+                    .table.table-striped
+                      table
+                        thead
+                          tr
+                            td &#xC870;
+                            td &#xD559;&#xBC88;
+                            td &#xC774;&#xB984;
+                            td &#xC870;&#xC7A5; &#xC5EC;&#xBD80;
+                            td &#xC774;&#xBA54;&#xC77C;
+                        tbody
+                          -for(var i=0;i<classs.students.length;i++)
+                            tr
+                              td
+                                
+                                input(type='number' name=classs.students[i]._id value='0')
+                              td #{classs.students[i].sid}
+                              td #{classs.students[i].name}
+                              td
+                                select.is-leader(name=classs.students[i]._id)
+                                  option(value='true') O
+                                  option(value='false' selected='') X
+                              td #{classs.students[i].email}
+                          
+                  div
+                    input#register-btn.btn.btn-info.btn-fill.btn-wd(type='submit' value='팀 등록하기')
+                    // <a id="register-btn" href="소프트웨어공학-open.html"><b>등록하기</b></a>
+    include ../includes/footer
+
+include ../includes/scripts

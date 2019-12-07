@@ -18,7 +18,8 @@ var teamSchema=mongoose.Schema({
   },
   members:[{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User',
+    default:[]
   }],
   posts:[{
     type:mongoose.SchemaTypes.ObjectId,

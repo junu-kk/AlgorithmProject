@@ -1,0 +1,11 @@
+extends layout_student
+
+block content
+  h2 학생 메인페이지
+  p 새로운 강의에 등록하세요!
+  form(action='/main/enroll' method='POST')
+    p 강의코드 : 
+    input(type='text' name='_id')
+    br
+    br
+    button.submit 등록
