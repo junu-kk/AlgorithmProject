@@ -1,0 +1,54 @@
+.sidebar(data-background-color='brown' data-active-color='danger')
+    //
+      Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+      Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+    .logo
+      a.simple-text.logo-mini(href='/main')
+        | CT
+      a.simple-text.logo-normal.sidebar-home(href='/main')
+        i.ti-home
+        span Unibus
+    .sidebar-wrapper
+      .user
+        .photo
+          img(src='/image/profile_pic')
+        .info
+          a.collapsed(data-toggle='collapse' href='#collapseExample')
+            span
+              | &#xD64D;&#xAE38;&#xB3D9;
+              b.caret
+          .clearfix
+          #collapseExample.collapse
+            ul.nav
+              li
+                a(href='/profile')
+                  span.sidebar-mini Mp
+                  span.sidebar-normal My Profile
+      ul.nav
+        li
+          a(href='/main')
+            i.ti-star
+            p &#xBA54;&#xC778; &#xD398;&#xC774;&#xC9C0;
+        li.active
+          a(data-toggle='collapse' href='#componentsExamples' aria-expanded='true')
+            i.ti-book
+            p
+              | &#xC218;&#xC5C5;
+              b.caret
+          #componentsExamples.collapse
+            ul.nav
+              li.active
+              a(href='/professor/class/'+classs._id)
+                span.sidebar-mini #{classs.name.substring(0,1)}
+                span.sidebar-normal #{classs.name}
+              // 강의에 팀원들 짜기를 완료했는지에 따라 open 폴더에 들어가거나 안 들어가거나로 나뉘어야 함.
+        li
+          a(href='/professor/class/create')
+            i.ti-cloud-up
+            p
+              | &#xAC15;&#xC758;&#xAC1C;&#xC124;
+        li
+          a(data-toggle='collapse' href='#tablesExamples')
+            i.ti-bar-chart
+            p
+              | &#xB370;&#xC774;&#xD130; &#xCD9C;&#xB825;

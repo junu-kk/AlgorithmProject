@@ -1,0 +1,85 @@
+doctype html
+//손봐야함! include만 해줌.
+head
+  include ../includes/head
+
+.wrapper
+  include ../includes/sidebar_professor
+  .main-panel
+    include ../includes/navbar
+    .content
+      .container-fluid
+        .card
+          .card-content.card.col-md-8.col-md-offset-2
+            .row
+              h1#class-name.card-title &#x300E;&#xC18C;&#xD504;&#xD2B8;&#xC6E8;&#xC5B4;&#xACF5;&#xD559;&#x300F;
+              .student-list
+                h2.table-title
+                  | &#xD559;&#xC0DD;&#xBA85;&#xB2E8;
+                form(action='index.html')
+                  .card-content.table-responsive.table-full-width
+                    .table.table-striped
+                      table
+                        thead
+                          tr
+                            td &#xC870;
+                            td &#xD559;&#xBC88;
+                            td &#xC774;&#xB984;
+                            td &#xC870;&#xC7A5; &#xC5EC;&#xBD80;
+                            td &#xC774;&#xBA54;&#xC77C;
+                        tbody
+                          tr
+                            td
+                              input(type='number' name='number' value='0')
+                            td 2016310220
+                            td &#xC6B0;&#xACBD;&#xCC2C;
+                            td
+                              select.is-leader(name='1')
+                                option(value='true') O
+                                option(value='false' selected='') X
+                            td wkc1002@naver.com
+                          tr
+                            td
+                              input(type='number' name='number' value='0')
+                            td 2016312924
+                            td &#xAC15;&#xC900;&#xC6B0;
+                            td
+                              select.is-leader(name='2')
+                                option(value='true') O
+                                option(value='false' selected='') X
+                            td originalKang@naver.com
+                          tr
+                            td
+                              input(type='number' name='number' value='0')
+                            td 2016311414
+                            td &#xAD8C;&#xC2E0;&#xD604;
+                            td
+                              select.is-leader(name='3')
+                                option(value='true') O
+                                option(value='false' selected='') X
+                            td junewookang@naver.com
+                          tr
+                            td
+                              input(type='number' name='number' value='0')
+                            td 2016311515
+                            td &#xC131;&#xC81C;&#xD604;
+                            td
+                              select.is-leader(name='4')
+                                option(value='true') O
+                                option(value='false' selected='') X
+                            td james0704@naver.com
+                          tr
+                            td
+                              input(type='number' name='number' value='0')
+                            td 2016311616
+                            td &#xAE40;&#xC0C1;&#xD654;
+                            td
+                              select.is-leader(name='5')
+                                option(value='true') O
+                                option(value='false' selected='') X
+                            td nagoo2@gmail.com
+                  div
+                    input#register-btn.btn.btn-info.btn-fill.btn-wd(type='submit' value='팀 등록하기')
+                    // <a id="register-btn" href="소프트웨어공학-open.html"><b>등록하기</b></a>
+    include ../includes/footer
+include ../includes/scripts

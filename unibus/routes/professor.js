@@ -56,9 +56,9 @@ router.post('/class/create', (req,res)=>{
 router.get('/class/:id', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     //이름충돌 때문에 class 대신 classs씀.
-    Class.findById(req.params.id).populate('students').exec((err,classs)=>{
+    Class.findById(req.params.id).populate({path:'students',populate:{path:'members', populate:{path:'team'}}}).exec((err,classs)=>{
       if(err) throw err;
-      return res.render('professor/class',{
+      return res.render('professor/class_new',{
         classs:classs
       });
     });

@@ -1,0 +1,43 @@
+doctype html
+head
+  include ../includes/head
+
+.wrapper
+  include ../includes/sidebar_professor
+  .main-panel
+    include ../includes/navbar
+    .content
+      .container-fluid
+        .card
+          .card-content.card.col-md-8.col-md-offset-2
+            .row
+              h1#class-name.card-title 소프트웨어공학
+              .student-list
+                h2.table-title
+                  | 학생명단
+                form(method='POST' action='/class/'+classs._id+'/end')
+                  .card-content.table-responsive.table-full-width
+                    .table.table-striped
+                      table
+                        thead
+                          tr
+                            td 조
+                            td 학번
+                            td 이름
+                            td 조장여부
+                            td 점수
+                            td 이메일
+                        tbody
+                          -for(var i=0;i<classs.students.length;i++)
+                            tr
+                              td #{classs.students[i].members[0].team.teamNumber}
+                              td #{classs.students[i].sid}
+                              td #{classs.students[i].name}
+                              td #{classs.students[i].members[0].isLeader}
+                              td #{classs.students[i].members[0].point}
+                              td #{classs.students[i].email}
+                  div
+                    input#finish-btn.btn.btn-info.btn-fill.btn-wd(type='submit' value='학기 마감하기')
+    include ../includes/footer
+include ../includes/scripts
+

@@ -5,7 +5,7 @@ var User = require('../models/User');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index_new', { title: 'unibus' });
+  res.render('index_newnew');
 });
 
 //for login page

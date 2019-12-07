@@ -1,0 +1,141 @@
+doctype html
+
+head
+  include includes/head
+.wrapper
+  include includes/sidebar
+  .main-panel
+    include includes/navbar
+    .content
+      .container-fluid
+        .row
+          .col-md-12
+            .card
+              .card-content
+                .toolbar
+                  // Here you can write extra buttons/actions for the toolbar
+                table#bootstrap-table.table
+                  thead.alert-info
+                    th(data-field='state' data-checkbox='true')
+                    th.text-center(data-field='id') ID
+                    th.text-center(data-field='name') Name
+                    th.text-center(data-field='position') Position
+                    th(data-field='title') Title
+                    th.td-actions.text-right(data-field='actions' data-events='operateEvents' data-formatter='operateFormatter') Actions
+                  tbody
+                    tr
+                      td
+                      td 1
+                      td &#xC6B0;&#xACBD;&#xCC2C;
+                      td &#xC790;&#xB8CC;&#xC870;&#xC0AC;
+                      td &#xD300;&#xD50C; &#xC790;&#xB8CC;&#xC870;&#xC0AC; &#xACB0;&#xACFC; &#xC62C;&#xB9BD;&#xB2C8;&#xB2E4;.
+                      td
+                    tr
+                      td
+                      td 2
+                      td &#xAC15;&#xC900;&#xC6B0;
+                      td &#xC790;&#xB8CC;&#xC870;&#xC0AC;
+                      td &#xD300;&#xD50C; &#xC790;&#xB8CC; &#xC870;&#xC0AC; &#xC218;&#xC815;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.
+                      td
+                    tr
+                      td
+                      td 3
+                      td &#xC131;&#xC81C;&#xD604;
+                      td PPT&#xC81C;&#xC791;
+                      td PPT &#xCD08;&#xC548; &#xB9CC;&#xB4E4;&#xC5B4;&#xBD24;&#xC2B5;&#xB2C8;&#xB2E4;.
+                      td
+                    tr
+                      td
+                      td 4
+                      td &#xAE40;&#xC0C1;&#xD654;
+                      td PPT&#xC81C;&#xC791;
+                      td PPT &#xB514;&#xC790;&#xC778; &#xC644;&#xB8CC;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;. &#xD655;&#xC778;&#xBC14;&#xB78D;&#xB2C8;&#xB2E4;.
+                      td
+                    tr
+                      td
+                      td 5
+                      td &#xAD8C;&#xC2E0;&#xD604;
+                      td &#xBC1C;&#xD45C;&#xC790;
+                      td &#xBC1C;&#xD45C;&#xC5D0; &#xC55E;&#xC11C; &#xC0AC;&#xC804;&#xC5D0; &#xC900;&#xBE44;&#xD574;&#xC57C;&#xD560; &#xBAA9;&#xB85D; &#xC791;&#xC131;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;. &#xD655;&#xC778;&#xBC14;&#xB78D;&#xB2C8;&#xB2E4;.
+                      td
+                    tr
+                      td
+                      td 6
+                      td &#xC6B0;&#xACBD;&#xCC2C;
+                      td &#xC790;&#xB8CC;&#xC870;&#xC0AC;
+                      td &#xACE0;&#xC0DD;&#xD558;&#xC168;&#xC2B5;&#xB2C8;&#xB2E4;. &#xB179;&#xD654;&#xBCF8; &#xC62C;&#xB824;&#xB4DC;&#xB9BD;&#xB2C8;&#xB2E4;.
+                      td
+            // end card
+          // end col-md-12
+        // end row
+    include includes/footer
+include includes/scripts
+script(type='text/javascript').
+  var $table = $('#bootstrap-table');
+  function operateFormatter(value, row, index) {
+  return [
+  '<div class="table-icons">',
+  '<a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">',
+  '<i class="ti-image"></i>',
+  '</a>',
+  '<a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
+  '<i class="ti-pencil-alt"></i>',
+  '</a>',
+  '<a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
+  '<i class="ti-close"></i>',
+  '</a>',
+  '</div>',
+  ].join('');
+  }
+  $().ready(function() {
+  window.operateEvents = {
+  'click .view': function(e, value, row, index) {
+  info = JSON.stringify(row);
+  swal('You click view icon, row: ', info);
+  console.log(info);
+  },
+  'click .edit': function(e, value, row, index) {
+  info = JSON.stringify(row);
+  swal('You click edit icon, row: ', info);
+  console.log(info);
+  },
+  'click .remove': function(e, value, row, index) {
+  console.log(row);
+  $table.bootstrapTable('remove', {
+  field: 'id',
+  values: [row.id]
+  });
+  }
+  };
+  $table.bootstrapTable({
+  toolbar: ".toolbar",
+  clickToSelect: true,
+  showRefresh: true,
+  search: true,
+  showToggle: true,
+  showColumns: true,
+  pagination: true,
+  searchAlign: 'left',
+  pageSize: 8,
+  clickToSelect: false,
+  pageList: [8, 10, 25, 50, 100],
+  formatShowingRows: function(pageFrom, pageTo, totalRows) {
+  //do nothing here, we don't want to show the text "showing x of y from..."
+  },
+  formatRecordsPerPage: function(pageNumber) {
+  return pageNumber + " rows visible";
+  },
+  icons: {
+  refresh: 'fa fa-refresh',
+  toggle: 'fa fa-th-list',
+  columns: 'fa fa-columns',
+  detailOpen: 'fa fa-plus-circle',
+  detailClose: 'ti-close'
+  }
+  });
+  //activate the tooltips after the data table is initialized
+  $('[rel="tooltip"]').tooltip();
+  $(window).resize(function() {
+  $table.bootstrapTable('resetView');
+  });
+  });
