@@ -1,0 +1,21 @@
+원래 내 계획
+
+과목이 원칙대로면 여러개 있는데, 일단 그 중 한개만 고려하는 걸로.
+갓직히 그냥 member 없애고 user-team-class 바로 연결하고 싶다.
+
+경찬이의 템플릿
+
+학생
+  프로필 : /profile
+  피드 : /main
+  일정
+    생성하기 : /schedule/create
+    입력하기 : /schedule/input
+  프리라이더를 찾아라! : /freerider
+  팀정보 : /team
+
+교수(/professor)
+  프로필 : /profile
+  메인페이지 : /class
+  강의개설 : /class/create
+  데이터 출력 : /result

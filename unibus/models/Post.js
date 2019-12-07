@@ -4,6 +4,9 @@ var postSchema=mongoose.Schema({
   title:{
     type:String,
   },
+  idx:{
+    type:Number,
+  },
   contents:{
     type:String,
   },

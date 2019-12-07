@@ -3,7 +3,7 @@ extends layout_student
 block content
   h2 학생 메인페이지
   //강의가 없는 경우
-  -if(user.classes.length==0)
+  -if(!user.classes.length)
     p 새로운 강의에 등록하세요!
     form(action='/main/enroll' method='POST')
       p 강의코드 : 
@@ -12,5 +12,14 @@ block content
       br
       button.submit 등록
   //강의가 있는 경우
-  //-else
-  
+  -if(user.classes.length)
+    -for(var i=0;i<posts.length;i++)
+      p #{posts[i].idx} #{posts[i].posted_by.user.name} #{posts[i].title}
+      a(href='/post/'+posts[i]._id) go
+      |
+      a(href='/post/update/'+posts[i]._id) update
+      |
+      a(href='/post/delete/'+posts[i]._id) delete
+    br
+  a(href='/post/create') create
+    
