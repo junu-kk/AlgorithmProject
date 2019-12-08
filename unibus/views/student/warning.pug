@@ -1,0 +1,22 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-12.text-center
+                #warning.ti-na.icon-danger
+                span
+                  h2
+                    | 접근 권한이 없습니다!
+              // end col-md-12
+              // end row
+        include ../includes/footer
+    include ../includes/scripts

@@ -1,0 +1,24 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-10.col-md-offset-1
+                .card.card-calendar
+                  .card-content
+                    #fullCalendar
+        include ../includes/footer
+    include ../includes/scripts
+    script(type='text/javascript').
+      $(document).ready(function() {
+      demo.initFullCalendar();
+      });
+  // Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js
