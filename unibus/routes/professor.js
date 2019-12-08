@@ -7,7 +7,6 @@ var Team = require('../models/Team');
 var multer = require('multer');
 var upload = multer({dest:'./upload'});
 
-
 function authCheck(req, res, callback){
   if(req.isUnauthenticated()) return res.redirect('/login');
   if(req.user.type=="Student") return res.redirect('/main');
@@ -20,9 +19,9 @@ router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(!user.class) return res.redirect('/professor/create_class');
 
-    Class.findById(user.class).exec((err,classs)=>{
+    Class.findById(user.class).populate({path:'students',populate:{path:'team'}}).exec((err,classs)=>{
       if(err) throw err;
-      if(!classs.team){
+      if(!classs.teams){
         return res.redirect('professor/create_team');
       }
       res.render('professor/main_new',{
@@ -97,42 +96,40 @@ router.get('/create_team', (req,res)=>{
   });
 });
 
-// 
+// 드디어해결...warning뜨지만알바아니야....promise써서해결했다..ㅜㅜ
 
 router.post('/create_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Class.findById(user.class).exec((err,classs)=>{
       if(err) throw err;
-      //console.log(req.body[classs.students[0]]);
-      //console.log(req.body[classs.students[0]][0]);
-      //console.log(req.body[classs.students[0]][1]);
-      
       var newTeam = new Team();
-      newTeam.teamNumber = req.body[classs.students[0]][0];
-      for(var i=0;i<classs.students.length;i++){
-        //console.log(req.body[classs.students[i]])
-        User.findById(classs.students[i]).exec((err,user)=>{
-          if(err) throw err;
-          user.team = newTeam._id;
-          if(req.body[user._id][1]){
-            user.isLeader=true;
-            //newTeam.leader=user._id;
-          }
-          //newTeam.members.push(user._id);
-          user.saveUser((err)=>{
-            if(err) throw err;
-          });
-          
-        });
-      }
-      newTeam.saveTeam((err)=>{
-        if(err) throw err;
-      });
+      newTeam.class=classs._id,
+      newTeam.teamNumber=req.body[classs.students[0]][0];
       
-    });
-    res.redirect('/professor');
-  })
-})
+      for(var i=0;i<classs.students.length;i++){
+        User.findById(classs.students[i])
+        .then((member)=>{
+          member.team=newTeam._id;
+          if(req.body[member._id][1]=='true'){
+            member.isLeader=true;
+            newTeam.leader=member._id;
+          }
+          newTeam.members.push(member._id);
+          return member.save();
+        })
+        .then(()=>{
+          newTeam.save();
+        })
+        .catch((err)=>{
+          if(err) throw err;
+        })
+      }
+      classs.teams.push(newTeam._id);
+      res.redirect('/professor');
+    })
+    
+  });
+});
 
 //항상 오류나는 부분. 구현예정.
 /*

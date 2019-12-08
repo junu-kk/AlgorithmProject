@@ -1,18 +1,47 @@
 doctype html
 
 head
-  include includes/head
+  include ../includes/head
 .wrapper
-  include includes/sidebar_professor
+  include ../includes/sidebar_professor
   .main-panel
-    include includes/navbar
+    include ../includes/navbar
     .content
       .container-fluid
-        .row
-          .col-md-12
-            .card
-              .card-content
-                .toolbar
-                -if(!)
-                
+        .card
+          .card-content.card.col-md-8.col-md-offset-2
+            .row
+              h1#class-name.card-title &#x300E;#{classs.name}&#x300F;
+              .student-list
+                h2.table-title
+                  | &#xD559;&#xC0DD;&#xBA85;&#xB2E8;
+                form(action='/professor/end_class' method='POST')
+                  .card-content.table-responsive.table-full-width
+                    .table.table-striped
+                      table
+                        thead
+                          tr
+                            td 조
+                            td &#xD559;&#xBC88;
+                            td &#xC774;&#xB984;
+                            td &#xC870;&#xC7A5; &#xC5EC;&#xBD80;
+                            td &#xC774;&#xBA54;&#xC77C;
+                        tbody
+                          -for(var i=0;i<classs.students.length;i++)
+                            tr
+                              td #{classs.students[i].team.teamNumber}
+                              td #{classs.students[i].sid}
+                              td #{classs.students[i].name}
+                              -if(classs.students[i].isLeader)
+                                td O
+                              -else
+                                td X
+                              td #{classs.students[i].email}
 
+                          
+                  div
+                    input#register-btn.btn.btn-info.btn-fill.btn-wd(type='submit' value='학기 마감하기')
+                    // <a id="register-btn" href="소프트웨어공학-open.html"><b>등록하기</b></a>
+    include ../includes/footer
+
+include ../includes/scripts
