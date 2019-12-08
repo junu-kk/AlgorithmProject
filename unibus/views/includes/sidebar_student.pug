@@ -11,7 +11,7 @@
   .sidebar-wrapper
     .user
       .photo
-        img(src='/image/profile_pic')
+        img(src=user.pic)
       .info
         a.collapsed(data-toggle='collapse', href='#collapseExample')
           span
@@ -21,7 +21,7 @@
         #collapseExample.collapse
           ul.nav
             li
-              a(href='profile.html')
+              a(href='/profile')
                 span.sidebar-mini Mp
                 span.sidebar-normal My Profile
     ul.nav

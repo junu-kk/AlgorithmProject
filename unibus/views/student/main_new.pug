@@ -1,0 +1,154 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-12
+                .card
+                  .card-content
+                    .toolbar
+                      // Here you can write extra buttons/actions for the toolbar
+                    table#bootstrap-table.table
+                      thead.alert-info
+                        tr
+                          th(data-field='state', data-checkbox='true')
+                          th.text-center(data-field='id') ID
+                          th.text-center(data-field='name') Name
+                          th.text-center(data-field='position') Position
+                          th(data-field='title') Title
+                          th.td-actions.text-right(data-field='actions', data-events='operateEvents', data-formatter='operateFormatter') Actions
+                      tbody
+                        -for(var i=0;i<posts.length;i++)
+                          tr
+                            td #{posts[i].idx}
+                            td #{posts[i].posted_by}
+                            td #{posts[i].posted_by.job}
+                            td #{posts[i].title}
+                            td
+                        //tr
+                          td
+                          td 1
+                          td 우경찬
+                          td 자료조사
+                          td 팀플 자료조사 결과 올립니다.
+                          td
+                        //tr
+                          td
+                          td 2
+                          td 강준우
+                          td 자료조사
+                          td 팀플 자료 조사 수정했습니다.
+                          td
+                        //tr
+                          td
+                          td 3
+                          td 성제현
+                          td PPT제작
+                          td PPT 초안 만들어봤습니다.
+                          td
+                        //tr
+                          td
+                          td 4
+                          td 김상화
+                          td PPT제작
+                          td PPT 디자인 완료했습니다. 확인바랍니다.
+                          td
+                        //tr
+                          td
+                          td 5
+                          td 권신현
+                          td 발표자
+                          td 발표에 앞서 사전에 준비해야할 목록 작성했습니다. 확인바랍니다.
+                          td
+                        //tr
+                          td
+                          td 6
+                          td 우경찬
+                          td 자료조사
+                          td 고생하셨습니다. 녹화본 올려드립니다.
+                          td
+              div
+                input#register-btn.btn.btn-info.btn-fill.btn-wd(type='button' onclick="location.href='/post/create'" value='글쓰기')
+              // end card
+            // end col-md-12
+          // end row
+        include ../includes/footer
+    include ../includes/scripts
+    script(type='text/javascript').
+      var $table = $('#bootstrap-table');
+      function operateFormatter(value, row, index) {
+      return [
+      '<div class="table-icons">',
+      '<a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">',
+      '<i class="ti-image"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
+      '<i class="ti-pencil-alt"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
+      '<i class="ti-close"></i>',
+      '</a>',
+      '</div>',
+      ].join('');
+      }
+      $().ready(function() {
+      window.operateEvents = {
+      'click .view': function(e, value, row, index) {
+      info = JSON.stringify(row);
+      swal('You click view icon, row: ', info);
+      console.log(info);
+      },
+      'click .edit': function(e, value, row, index) {
+      info = JSON.stringify(row);
+      swal('You click edit icon, row: ', info);
+      console.log(info);
+      },
+      'click .remove': function(e, value, row, index) {
+      console.log(row);
+      $table.bootstrapTable('remove', {
+      field: 'id',
+      values: [row.id]
+      });
+      }
+      };
+      $table.bootstrapTable({
+      toolbar: ".toolbar",
+      clickToSelect: true,
+      showRefresh: true,
+      search: true,
+      showToggle: true,
+      showColumns: true,
+      pagination: true,
+      searchAlign: 'left',
+      pageSize: 8,
+      clickToSelect: false,
+      pageList: [8, 10, 25, 50, 100],
+      formatShowingRows: function(pageFrom, pageTo, totalRows) {
+      //do nothing here, we don't want to show the text "showing x of y from..."
+      },
+      formatRecordsPerPage: function(pageNumber) {
+      return pageNumber + " rows visible";
+      },
+      icons: {
+      refresh: 'fa fa-refresh',
+      toggle: 'fa fa-th-list',
+      columns: 'fa fa-columns',
+      detailOpen: 'fa fa-plus-circle',
+      detailClose: 'ti-close'
+      }
+      });
+      //activate the tooltips after the data table is initialized
+      $('[rel="tooltip"]').tooltip();
+      $(window).resize(function() {
+      $table.bootstrapTable('resetView');
+      });
+      });
+  // Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js

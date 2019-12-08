@@ -7,7 +7,7 @@
 
 학생
   프로필 : /profile
-  피드 : /main
+  피드 : /main, 게시물관련은 /post에서.
   일정
     생성하기 : /schedule/create
     입력하기 : /schedule/input

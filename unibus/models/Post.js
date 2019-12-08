@@ -26,19 +26,6 @@ var postSchema=mongoose.Schema({
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Member'
   }],
-  comments:[{
-    by:{
-      type:mongoose.SchemaTypes.ObjectId,
-      ref:'Member'
-    },
-    contents:{
-      type:String,
-    },
-    updateTime:{
-      type:Date,
-      default:Date.now,
-    }
-  }],
   file:{
     type:String,
   }

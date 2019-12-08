@@ -5,7 +5,7 @@ html(lang='en')
     include ../includes/head
   body
     .wrapper
-      include ../includes/sidebar_professor
+      include ../includes/sidebar_student
       .main-panel
         include ../includes/navbar
         .content
@@ -25,13 +25,16 @@ html(lang='en')
                           small #{user.email}
                       
                   hr
-                  //.text-center
+                  .text-center
                     .row
                       .col-md-3.col-md-offset-1
                         h5
-                          | 교수
+                          -if(user.isLeader)
+                            | O
+                          -else
+                            | X
                           br
-                          small 담당
+                          small 조장여부
                       .col-md-4
                         h5
                           | #{user.point}
@@ -44,7 +47,7 @@ html(lang='en')
                           small 게시물수
                       
               .col-lg-8.col-md-7
-                form(method='POST' action='/professor/profile/upload' enctype='multipart/form-data')
+                form(method='POST' action='/profile/upload' enctype='multipart/form-data')
                   .card
                     .card-header
                       h4.card-title 프로필 사진 업로드
@@ -58,7 +61,7 @@ html(lang='en')
                           button.btn.btn-info.btn-fill.btn-wd(type='submit') 업로드
                         .clearfix
               
-                form(method='POST' action='/professor/profile/update')
+                form(method='POST' action='/profile/update')
                   .card
                     .card-header
                       h4.card-title Edit Profile
@@ -71,7 +74,7 @@ html(lang='en')
                               input.form-control.border-input(type='text', value=user.name)
                           .col-md-6
                             .form-group
-                              label 교번
+                              label 학번
                               input.form-control.border-input(type='text', value=user.sid)
                         .row
                           .col-md-6
@@ -82,11 +85,7 @@ html(lang='en')
                             .form-group
                               label(for='exampleInputEmail1') 이메일 주소
                               input.form-control.border-input(type='email', value=user.email)
-                        //.row
-                          .col-md-12
-                            .form-group
-                              label 상태 메시지
-                              textarea.form-control.border-input(rows='5', placeholder='Here can be your description')
+                        
                         .text-center
                           button.btn.btn-info.btn-fill.btn-wd(type='submit') 프로필 수정하기
                         .clearfix

@@ -35,7 +35,7 @@ router.get('/', (req,res)=>{
 
 router.get('/profile', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    res.render('professor/profile', {
+    res.render('professor/profile_new', {
       user:user
     });
   });
@@ -44,11 +44,14 @@ router.get('/profile', (req,res)=>{
 router.post('/profile/upload', upload.single('file'), (req, res, next) => {
   let image='/image/'+req.file.filename;
   authCheck(req,res,(req,res,user)=>{
-    user.pic = image;
-    user.saveUser((err)=>{
+    User.findById(user._id).exec((err,user)=>{
       if(err) throw err;
+      user.pic = image;
+      user.saveUser((err)=>{
+        if(err) throw err;
+      });
+      res.redirect('/professor/profile');
     });
-    res.redirect('/profile');
   });
 });
 

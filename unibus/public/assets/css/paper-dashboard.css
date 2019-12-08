@@ -12127,6 +12127,12 @@ star {
   /* letter-spacing: 10px; */
 }
 
+#warning{
+  /* display: inline; */
+  font-size: 500px;
+}
+
+
 /* 여기까지 */
 
 .lock-page .card-lock {

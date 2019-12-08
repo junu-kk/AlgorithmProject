@@ -2,3 +2,5 @@
 라우터 안의 순서 중요하다. :id 들어가는거는 나중에 넣자.
 ncu -u와 npm install로 dependencies 업데이트.
 req.user에 모든 user정보가 들어있어서, 굳이 User.findOne 안해도될듯??
+ -> user를 save할때만 User.findById로 하자.
+동기처리 -> 프로미스 사용!!! (이번 프로젝트의 큰 수확)

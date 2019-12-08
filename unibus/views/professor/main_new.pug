@@ -22,10 +22,11 @@ head
                         thead
                           tr
                             td 조
-                            td &#xD559;&#xBC88;
-                            td &#xC774;&#xB984;
-                            td &#xC870;&#xC7A5; &#xC5EC;&#xBD80;
-                            td &#xC774;&#xBA54;&#xC77C;
+                            td 학번
+                            td 이름
+                            td 조장 여부
+                            td 이메일
+                            td 점수
                         tbody
                           -for(var i=0;i<classs.students.length;i++)
                             tr
@@ -37,6 +38,7 @@ head
                               -else
                                 td X
                               td #{classs.students[i].email}
+                              td #{classs.students[i].point}
 
                           
                   div

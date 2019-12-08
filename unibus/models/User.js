@@ -20,9 +20,13 @@ var userSchema=mongoose.Schema({
     default:'Student',
     enum:['Student','Professor','Administrator'],
   },
+  job:{
+    type:String,
+    default:''
+  },
   pic:{
     type:String,
-    default:'profile_pic'
+    default:'/image/profile_pic'
   },
   sid:{
     type:String,

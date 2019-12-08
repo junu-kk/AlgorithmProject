@@ -16,9 +16,9 @@ router.get('/', (req, res)=> {
   authCheck(req,res,(req,res,user)=>{
     if(!user.class) return res.redirect('/main/enroll');
     if(!user.team) return res.redirect('/main/no_team');
-    Post.find({team:user.team}).exec((err,posts)=>{
+    Post.find({team:user.team}).populate('posted_by').exec((err,posts)=>{
       if(err) throw err;
-      res.render('student/main', {
+      res.render('student/main_new', {
         user:user,
         posts:posts,
       });
