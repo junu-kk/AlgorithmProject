@@ -19,11 +19,12 @@ router.get('/create', (req,res)=>{
 });
 
 //일정을 입력하자.
+/*
 router.get('/input', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(user.team)
 
   })
 })
-
+*/
 module.exports = router;
