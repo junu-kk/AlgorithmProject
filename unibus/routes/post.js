@@ -58,10 +58,11 @@ router.post('/create', (req,res)=>{
 //게시물 조회(id필요)
 router.get('/:id', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    Post.findById(req.params.id).exec((err,post)=>{
+    Post.findById(req.params.id).populate('posted_by').exec((err,post)=>{
       if(err) throw err;
       res.render('student/post',{
-        user:user
+        user:user,
+        post:post
       });
     });
   });

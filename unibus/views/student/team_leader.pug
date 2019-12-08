@@ -1,4 +1,44 @@
-extends layout_student
+doctype html
 
-block content
-  h2 팀정보 페이지 (조장)
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-8.col-md-offset-2
+                .card
+                  .card-header
+                    h4.card-title Team Members
+                  .card-content
+                    form(action='/team/setjob', method='POST')
+                      ul.list-unstyled.team-members
+                        -for(var i=0;i<team.members.length;i++)
+                          li
+                            .row
+                              .col-xs-3
+                                .avatar
+                                  img.img-circle.img-no-padding.img-responsive(src=team.members[i].pic, alt='Circle Image')  
+                              .col-xs-6
+                                h5 #{team.members[i].name}
+                                br
+                                .form-group
+                                  label.text-success 담당: 
+                                  span.text-success
+                                    | #{team.members[i].job}
+                                  span.text-success
+                                    input.form-control.border-input.team-edit(type='text' name=team.members[i]._id placeholder='수정할 담당을 입력하세요.')
+                              .col-xs-3.text-right
+                                btn.btn.btn-sm.btn-success.btn-icon
+                                  i.fa.fa-envelope
+                        .text-center
+                          button.btn.btn-info.btn-fill.btn-wd(type='submit') 역할 설정하기
+                        .clearfix
+
+        include ../includes/footer
+    include ../includes/scripts
