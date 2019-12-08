@@ -1,0 +1,41 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-12
+                .card
+                  .card-header
+                    h4.card-title 글쓰기
+                  .card-content
+                    form.form-horizontal(method='POST', action='/post/create')
+                      fieldset
+                        .form-group
+                          label.col-sm-2.control-label 제목
+                          .col-sm-10
+                            input.form-control(type='text' name='title' placeholder='제목을 입력해주세요')
+                            input(type='hidden' name='idx' value=idx)
+                      fieldset
+                        .form-group
+                          label.col-sm-2.control-label 내용
+                          .col-sm-10
+                            textarea.form-control(placeholder='내용을 입력해주세요' rows='3' name='contents')
+                      fieldset  
+                        .form-group
+                          label.col-sm-2.control-label
+                          .col-sm-10
+                            button.btn.btn-info.btn-fill.btn-wd(type='submit') 업로드
+                      //첨부파일 나중에 생각.
+                      //fieldset
+                        .form-group
+                          label.col-sm-2.control-label 첨부파일
+        include ../includes/footer
+    include ../includes/scripts

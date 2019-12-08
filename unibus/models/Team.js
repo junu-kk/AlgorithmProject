@@ -23,7 +23,8 @@ var teamSchema=mongoose.Schema({
   }],
   posts:[{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Post'
+    ref:'Post',
+    default:[]
   }],
   appointments:[{
     type:mongoose.SchemaTypes.ObjectId,

@@ -28,10 +28,12 @@ html(lang='en')
                       tbody
                         -for(var i=0;i<posts.length;i++)
                           tr
+                            td
                             td #{posts[i].idx}
-                            td #{posts[i].posted_by}
+                            td #{posts[i].posted_by.name}
                             td #{posts[i].posted_by.job}
-                            td #{posts[i].title}
+                            td
+                              a(href='/post/'+posts[i]._id) #{posts[i].title}
                             td
                         //tr
                           td

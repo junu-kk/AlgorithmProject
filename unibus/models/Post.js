@@ -20,14 +20,15 @@ var postSchema=mongoose.Schema({
   },
   posted_by:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User'
   },
   views_by:[{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Member'
+    ref:'User'
   }],
   file:{
     type:String,
+    default:''
   }
 });
 

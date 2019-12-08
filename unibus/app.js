@@ -17,6 +17,7 @@ var professorRouter = require('./routes/professor');
 var profileRouter = require('./routes/profile');
 var teamRouter = require('./routes/team');
 var scheduleRouter = require('./routes/schedule');
+var postRouter = require('./routes/post');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/professor', professorRouter);
 app.use('/profile', profileRouter);
 app.use('/team', teamRouter);
 app.use('/schedule', scheduleRouter);
+app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
