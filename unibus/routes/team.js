@@ -45,4 +45,43 @@ router.post('/setjob', (req,res)=>{
   });
 });
 
+router.get('/freerider', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    if(!user.isLeader) return res.render('student/warning');
+    Team.findById(user.team).populate('members').exec((err,team)=>{
+      if(err) throw err;
+      var i=0;
+      var min=team.members[i].point
+      var minIndex=0;
+      for(i=1;i<team.members.length;i++){
+        if(team.members[i].point<min){
+          minIndex=i;
+          min=team.members[i].point;
+        }
+      }
+      
+      return res.render('student/freerider',{
+        user:user,
+        team:team,
+        freerider:team.members[minIndex]
+      });
+      
+    });
+  });
+});
+
+router.post('/freerider', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    
+    User.findById(req.body.freerider).exec((err,freerider)=>{
+      if(err) throw err;
+      freerider.isFreerider=true;
+      freerider.pic='/image/freerider.png';
+      freerider.saveUser((err)=>{
+        if(err) throw err;
+      });
+      res.redirect('/main');
+    })
+  })
+})
 module.exports = router;

@@ -37,12 +37,20 @@ router.post('/create', (req,res)=>{
     newPost.savePost((err)=>{
       if(err) throw err;
     });
+    
     User.findById(user._id).exec((err,user)=>{
       if(err) throw err;
       user.posts.push(newPost._id);
+      user.point+=10;
+      if(user.isFreerider){
+        user.isFreerider=false;
+        user.pic='/image/profile_pic';
+        console.log(user);
+      }
       user.saveUser((err)=>{
         if(err) throw err;
       })
+      
     });
     Team.findById(user.team).exec((err,team)=>{
       if(err) throw err;
@@ -60,6 +68,16 @@ router.get('/:id', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Post.findById(req.params.id).populate('posted_by').exec((err,post)=>{
       if(err) throw err;
+      if(!post.views_by.includes(user)){
+        post.views_by.push(user);
+        User.findById(user).exec((err,user)=>{
+          
+          user.point++;
+          user.saveUser((err)=>{
+            if(err) throw err;
+          });
+        });
+      }
       res.render('student/post',{
         user:user,
         post:post

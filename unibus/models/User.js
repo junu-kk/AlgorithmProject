@@ -24,6 +24,10 @@ var userSchema=mongoose.Schema({
     type:String,
     default:''
   },
+  importancy:{
+    type:Number,
+    default:0
+  },
   pic:{
     type:String,
     default:'/image/profile_pic'

@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
 
 var appointmentSchema = mongoose.Schema({
-  date:{
+  startDate:{
+    type:Date,
+    default:''
+  },
+  endDate:{
     type:Date,
     default:''
   },

@@ -1,0 +1,68 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-8.col-md-offset-2
+                .card
+                  .card-header
+                    h4.card-title Team Members
+                  .card-content
+                    form(action='/team/freerider', method='POST')
+                      ul.list-unstyled.team-members
+                        -for(var i=0;i<team.members.length;i++)
+                          li
+                            .row
+                              .col-xs-3
+                                .avatar
+                                  img.img-circle.img-no-padding.img-responsive(src=team.members[i].pic, alt='Circle Image')  
+                              .col-xs-6
+                                h5 #{team.members[i].name}
+                                -if(team.members[i].isLeader)
+                                  h4 ★조장입니다★
+                                br
+                                -if(team.members[i].isFreerider)
+                                  .form-group.text-danger
+                                    h4
+                                      label 점수: 
+                                      span #{team.members[i].point}
+                                -else
+                                  .form-group.text-success
+                                    h4
+                                      label 점수: 
+                                      span #{team.members[i].point}
+
+                                  
+                                  
+                              .col-xs-3.text-right
+                                -if(team.members[i].isFreerider)
+                                  btn.btn.btn-sm.btn-danger.btn-icon
+                                    i.fa.fa-arrow-left
+                                -else
+                                  btn.btn.btn-sm.btn-success.btn-icon
+                                    i.fa.fa-envelope
+                        li
+                          .row
+                            .col-xs-3
+                              .avatar
+                                img.img-circle.img-no-padding.img-responsive(src='/image/freerider.png', alt='Circle Image')  
+                              br
+                            .col-xs-6  
+                              .form-group
+                                h5 현재 가장 점수가 낮은 팀원은
+                                h4 #{freerider.name} 입니다.
+                                input.form-control.border-input.team-edit(type='hidden' name='freerider' value=freerider._id)
+                        .text-center
+                          button.btn.btn-info.btn-fill.btn-wd(type='submit') 프리라이더 지정하기
+                        .clearfix
+
+        include ../includes/footer
+    include ../includes/scripts

@@ -1,0 +1,52 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-8.col-md-offset-2
+                .card
+                  .card-header
+                    h4.card-title Team Members
+                  .card-content
+                    form(action='/schedule/fix', method='POST')
+                      ul.list-unstyled.team-members
+                        -for(var i=0;i<team.members.length;i++)
+                          li
+                            .row
+                              .col-xs-3
+                                .avatar
+                                  img.img-circle.img-no-padding.img-responsive(src=team.members[i].pic, alt='Circle Image')  
+                              .col-xs-6
+                                h5 #{team.members[i].name}
+                                -if(team.members[i].schedule)
+                                  h4 일정 등록되었습니다.
+                                -else
+                                  h4 일정이 등록되지 않았습니다.
+                                -if(team.members[i].isLeader)
+                                  h4 ★조장입니다★
+                                br
+                                .form-group
+                                  label.text-success 담당: 
+                                  span.text-success
+                                    | #{team.members[i].job}
+                                .form-group
+                                  label.text-success 가중치: 
+                                  span.text-success
+                                    input.form-control.border-input.team-edit(type='text' name=team.members[i]._id placeholder='가중치를 입력하세요.')
+                              .col-xs-3.text-right
+                                btn.btn.btn-sm.btn-success.btn-icon
+                                  i.fa.fa-envelope
+                        .text-center
+                          button.btn.btn-info.btn-fill.btn-wd(type='submit') 그리디 레츠기릿
+                        .clearfix
+
+        include ../includes/footer
+    include ../includes/scripts

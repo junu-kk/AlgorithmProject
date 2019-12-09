@@ -19,15 +19,20 @@ router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(!user.class) return res.redirect('/professor/create_class');
 
-    Class.findById(user.class).populate({path:'students',populate:{path:'team'}}).exec((err,classs)=>{
-      if(err) throw err;
-      if(!classs.teams){
-        return res.redirect('professor/create_team');
+    Class.findById(user.class).populate({path:'students',populate:{path:'team'}})
+    .then((classs)=>{
+      
+      console.log(classs.teams.length);
+      if(!classs.teams.length){
+        return res.redirect('/professor/create_team');
       }
       res.render('professor/main_new',{
         user:user,
         classs:classs
       })
+    })
+    .catch((err)=>{
+      if(err) throw err;
     })
   });
 });
@@ -72,9 +77,19 @@ router.post('/create_class', (req,res)=>{
     newClass.semester=req.body.semester;
     
     newClass.professor = user._id;
+    
     newClass.saveClass((err)=>{
       if(err) throw err;
     });
+    User.findById(user._id)
+    .then((user)=>{
+      user.class=newClass._id;
+      return user.save();
+    })
+    .then(()=>{
+      res.redirect('/professor');
+    });
+    /*
     User.findById(user._id).exec((err,user)=>{
       if(err) throw err;
       user.class=newClass._id;
@@ -84,6 +99,7 @@ router.post('/create_class', (req,res)=>{
       // class가 저장되는데 좀 시간이 걸리므로, 프로페서로 바로 가면 안됨.
       res.redirect('/logout');
     });
+    */
   });
 })
 
@@ -115,22 +131,27 @@ router.post('/create_team', (req,res)=>{
           member.team=newTeam._id;
           if(req.body[member._id][1]=='true'){
             member.isLeader=true;
+            member.point=5;
             newTeam.leader=member._id;
           }
           newTeam.members.push(member._id);
           return member.save();
         })
         .then(()=>{
-          newTeam.save();
+          return newTeam.save();
+        })
+        .then(()=>{
+          classs.teams.push(newTeam._id);
+          return classs.save();
+        })
+        .then(()=>{
+          res.redirect('/professor');
         })
         .catch((err)=>{
           if(err) throw err;
         })
       }
-      classs.teams.push(newTeam._id);
-      res.redirect('/professor');
     })
-    
   });
 });
 

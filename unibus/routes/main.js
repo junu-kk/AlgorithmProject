@@ -37,7 +37,7 @@ router.get('/no_team', (req,res)=>{
 router.get('/enroll', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     //경찬이 완성되면 enroll_new로 바꿀것.
-    res.render('student/enroll', {
+    res.render('student/enroll_wkc', {
       user:user
     });
   });

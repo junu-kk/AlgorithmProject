@@ -36,6 +36,31 @@ router.post('/create', (req,res)=>{
     newAppointment.info = req.body.title;
     newAppointment.plan.startDate = req.body.start;
     newAppointment.plan.endDate = req.body.end;
+    return newAppointment.save()
+    .then(()=>{
+      return Team.findById(user.team)
+    })
+    .then((team)=>{
+      team.appointment=newAppointment._id;
+      return team.save()
+    })
+    .then(()=>{
+      res.redirect('/schedule/input');
+    })
+    .catch((err)=>{
+      if(err) throw err;
+    })
+  })
+})
+
+/*
+router.post('/create', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    var newAppointment = new Appointment();
+    newAppointment.team = user.team;
+    newAppointment.info = req.body.title;
+    newAppointment.plan.startDate = req.body.start;
+    newAppointment.plan.endDate = req.body.end;
     newAppointment.save()
     .then(()=>{
       Team.findById(user.team).exec((err,team)=>{
@@ -48,12 +73,12 @@ router.post('/create', (req,res)=>{
     })
   });
 });
-
+*/
 router.get('/input', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Team.findById(user.team).populate('appointment').exec((err,team)=>{
       if(err) throw err;
-      if(!team.appointment) return res.redirect('/main');
+      if(!team.appointment) return res.render('student/warning');
       else{
         res.render('student/schedule_input',{
           user:user,
@@ -84,13 +109,7 @@ router.post('/input', (req,res)=>{
         newSchedule.end3=req.body.end3;
         newSchedule.start4=req.body.start4;
         newSchedule.end4=req.body.end4;
-        /*
-        [req.body.start0,req.body,end0]);
-        newSchedule.time.push([req.body.start1,req.body,end1]);
-        newSchedule.time.push([req.body.start2,req.body,end2]);
-        newSchedule.time.push([req.body.start3,req.body,end3]);
-        newSchedule.time.push([req.body.start4,req.body,end4]);
-        */
+        
         newSchedule.appointment=appointment._id;
         console.log(newSchedule);
         newSchedule.saveSchedule((err)=>{
@@ -118,13 +137,43 @@ router.post('/input', (req,res)=>{
   res.redirect('/main');
 })
 
-//일정을 입력하자.
-/*
-router.get('/input', (req,res)=>{
+router.get('/fix', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    if(user.team)
+    if(!user.isLeader){
+      return res.render('student/warning',{
+        user:user
+      });
+    }
+    Appointment.findOne({team:user.team}).exec((err,appointment)=>{
+      if(err) throw err;
+      Team.findById(user.team).populate('members').exec((err,team)=>{
+        if(err) throw err;
+        res.render('student/schedule_fix',{
+          user:user,
+          app:appointment,
+          team:team
+        });
+      });
+      
+    });
+    
+  });
+});
 
-  })
-})
-*/
+router.post('/fix', (req,res)=>{
+  //그리디가 들어가는 부분. 추후구현예정
+  res.redirect('/schedule/result');
+});
+
+router.get('/result', (req,res)=>{
+  authCheck(req,res,(req,res,user)=>{
+    Team.findById(user.team).populate('members').exec((err,team)=>{
+      if(err) throw err;
+      return res.render('student/result',{
+        user:user,
+        team:team
+      });
+    });
+  });
+});
 module.exports = router;

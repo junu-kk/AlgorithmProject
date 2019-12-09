@@ -1,0 +1,246 @@
+doctype html
+//
+  =========================================================
+  * Paper Dashboard PRO - V1.3.1
+  =========================================================
+  * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro
+  * Available with purchase of license from https://www.creative-tim.com/product/paper-dashboard-pro
+  * Copyright 2017 Creative Tim (https://www.creative-tim.com)
+  * License Creative Tim (https://www.creative-tim.com/license)
+  =========================================================
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    link(rel='apple-touch-icon', sizes='76x76', href='../../assets/img/icon-social.png')
+    link(rel='icon', type='image/png', sizes='96x96', href='../../assets/img/icon-social.png')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    title Unibus for the better world
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+    meta(name='viewport', content='width=device-width')
+    // Bootstrap core CSS
+    link(href='../../assets/css/bootstrap.min.css', rel='stylesheet')
+    // Paper Dashboard core CSS
+    link(href='../../assets/css/paper-dashboard.css', rel='stylesheet')
+    // CSS for Demo Purpose, don't include it in your project
+    link(href='../../assets/css/demo.css', rel='stylesheet')
+    // Fonts and icons
+    link(href='https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Muli:400,300', rel='stylesheet', type='text/css')
+    link(href='../../assets/css/themify-icons.css', rel='stylesheet')
+  body
+    .wrapper
+      .sidebar(data-background-color='brown', data-active-color='danger')
+        //
+          Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+          Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+        .logo
+          a.simple-text.logo-mini(href='feed.html')
+            | CT
+          a.simple-text.logo-normal.sidebar-home(href='feed.html')
+            i.ti-home
+            span Unibus
+        .sidebar-wrapper
+          .user
+            .photo
+              img(src='../../assets/img/faces/띠용.jpeg')
+            .info
+              a.collapsed(data-toggle='collapse', href='#collapseExample')
+                span
+                  | 홍길동
+                  b.caret
+              .clearfix
+              #collapseExample.collapse
+                ul.nav
+                  li
+                    a(href='profile.html')
+                      span.sidebar-mini Mp
+                      span.sidebar-normal My Profile
+          ul.nav
+            li
+              a(href='feed.html')
+                i.ti-panel
+                p 피드
+            li
+              a(data-toggle='collapse', href='#componentsExamples')
+                i.ti-calendar
+                p
+                  | 일정
+                  b.caret
+              #componentsExamples.collapse
+                ul.nav
+                  li
+                    a(href='calendar/create.html')
+                      span.sidebar-mini 생
+                      span.sidebar-normal 생성하기
+                  li
+                    a(href='calendar/input.html')
+                      span.sidebar-mini 입
+                      span.sidebar-normal 입력하기
+            li.active
+              a(href='find-freerider.html')
+                // 프리라이더 페이지 생성 필요
+                i.ti-gift
+                p
+                  | 프리라이더를 찾아라!
+            li
+              a(href='team.html')
+                i.ti-user
+                p
+                  | 팀 정보
+      .main-panel
+        nav.navbar.navbar-default
+          .container-fluid
+            .navbar-minimize
+              button#minimizeSidebar.btn.btn-fill.btn-icon
+                i.ti-more-alt
+            .navbar-header
+              button.navbar-toggle(type='button')
+                span.sr-only Toggle navigation
+                span.icon-bar.bar1
+                span.icon-bar.bar2
+                span.icon-bar.bar3
+              a.navbar-brand(href='find-freerider.html') 프리라이더를 찾아라!
+            .collapse.navbar-collapse
+              form.navbar-form.navbar-left.navbar-search-form(role='search')
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-search
+                  input.form-control(type='text', value='', placeholder='Search...')
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a.dropdown-toggle.btn-magnif(href='index.html')
+                    i.ti-power-off
+                    p 로그아웃
+                li.dropdown
+                  a.dropdown-toggle
+                    i.ti-cup
+                    span.notification 점수:
+                    span 100
+        .content
+          .container-fluid
+            .row
+              .col-md-8.col-md-offset-2
+                .card
+                  .card-header
+                    h4.card-title Team Members
+                  .card-content
+                    form(action='index.html', method='post')
+                      ul.list-unstyled.team-members
+                        li
+                          .row
+                            .col-xs-3
+                              .avatar
+                                img.img-circle.img-no-padding.img-responsive(src='../../assets/img/faces/띠용.jpeg', alt='Circle Image')
+                            .col-xs-6
+                              h5 우경찬
+                              .form-group
+                                label 담당: 
+                                span
+                                  | 자료조사
+                              .form-group.text-warning
+                                h4
+                                  label Score: 
+                                  span 280
+                            .col-xs-3.text-right
+                              span.btn.btn-sm.btn-success.btn-icon
+                                i.fa.fa-close
+                        li
+                          .row
+                            .col-xs-3
+                              .avatar
+                                img.img-circle.img-no-padding.img-responsive(src='../../assets/img/faces/띠용.jpeg', alt='Circle Image')
+                            .col-xs-6
+                              h5 강준우
+                              .form-group
+                                label 담당: 
+                                span
+                                  | 피피티제작
+                              .form-group.text-warning
+                                h4
+                                  label Score: 
+                                  span 180
+                            .col-xs-3.text-right
+                              span.btn.btn-sm.btn-success.btn-icon
+                                i.fa.fa-close
+                        li
+                          .row
+                            .col-xs-3
+                              .avatar
+                                img.img-circle.img-no-padding.img-responsive(src='../../assets/img/freerider.png', alt='Circle Image')
+                            .col-xs-6
+                              h5 성제현
+                              .form-group
+                                label 담당: 
+                                span
+                                  | 자료조사
+                              .form-group.text-danger
+                                h4
+                                  label Score: 
+                                  span 80
+                            .col-xs-3.text-right
+                              btn.btn.btn-sm.btn-success.btn-icon
+                                i.fa.fa-arrow-left
+                              br
+                              label 지목하기
+                        .text-center
+                          button.btn.btn-info.btn-fill.btn-wd(type='submit') 반영하기
+                        .clearfix
+        footer.footer
+          .container-fluid
+            nav.pull-left
+              ul
+                li
+                  a(href='https://www.creative-tim.com')
+                    | Creative Tim
+                li
+                  a(href='https://blog.creative-tim.com')
+                    | Blog
+                li
+                  a(href='https://www.creative-tim.com/license')
+                    | Licenses
+            .copyright.pull-right
+              | © 
+              script.
+                document.write(new Date().getFullYear())
+              | , made by 탐크루즈
+    // Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js
+    script(src='../../assets/js/jquery.min.js', type='text/javascript')
+    script(src='../../assets/js/jquery-ui.min.js', type='text/javascript')
+    script(src='../../assets/js/perfect-scrollbar.min.js', type='text/javascript')
+    script(src='../../assets/js/bootstrap.min.js', type='text/javascript')
+    // Forms Validations Plugin
+    script(src='../../assets/js/jquery.validate.min.js')
+    // Promise Library for SweetAlert2 working on IE
+    script(src='../../assets/js/es6-promise-auto.min.js')
+    // Plugin for Date Time Picker and Full Calendar Plugin
+    script(src='../../assets/js/moment.min.js')
+    // Date Time Picker Plugin is included in this js file
+    script(src='../../assets/js/bootstrap-datetimepicker.js')
+    // Select Picker Plugin
+    script(src='../../assets/js/bootstrap-selectpicker.js')
+    // Switch and Tags Input Plugins
+    script(src='../../assets/js/bootstrap-switch-tags.js')
+    // Circle Percentage-chart
+    script(src='../../assets/js/jquery.easypiechart.min.js')
+    // Charts Plugin
+    script(src='../../assets/js/chartist.min.js')
+    // Notifications Plugin
+    script(src='../../assets/js/bootstrap-notify.js')
+    // Sweet Alert 2 plugin
+    script(src='../../assets/js/sweetalert2.js')
+    // Vector Map plugin
+    script(src='../../assets/js/jquery-jvectormap.js')
+    // Google Maps Plugin
+    script(src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE')
+    // Wizard Plugin
+    script(src='../../assets/js/jquery.bootstrap.wizard.min.js')
+    // Bootstrap Table Plugin
+    script(src='../../assets/js/bootstrap-table.js')
+    // Plugin for DataTables.net
+    script(src='../../assets/js/jquery.datatables.js')
+    // Full Calendar Plugin
+    script(src='../../assets/js/fullcalendar.min.js')
+    // Paper Dashboard PRO Core javascript and methods for Demo purpose
+    script(src='../../assets/js/paper-dashboard.js')
+    // Paper Dashboard PRO DEMO methods, don't include it in your project!
+    script(src='../../assets/js/demo.js')
