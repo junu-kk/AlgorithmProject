@@ -26,6 +26,8 @@ html(lang='en')
                                   img.img-circle.img-no-padding.img-responsive(src=team.members[i].pic, alt='Circle Image')  
                               .col-xs-6
                                 h5 #{team.members[i].name}
+                                -if(team.members[i].isLeader)
+                                  h4 ★조장입니다★
                                 br
                                 .form-group
                                   label.text-success 담당: 

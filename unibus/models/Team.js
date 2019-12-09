@@ -28,8 +28,7 @@ var teamSchema=mongoose.Schema({
   }],
   appointment:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Appointment',
-    default:''
+    ref:'Appointment'
   }
 });
 

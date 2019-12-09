@@ -1,0 +1,27 @@
+doctype html
+
+html(lang='en')
+  head
+    include ../includes/head
+  body
+    .wrapper
+      include ../includes/sidebar_student
+      .main-panel
+        include ../includes/navbar
+        .content
+          .container-fluid
+            .row
+              .col-md-10.col-md-offset-1
+                .card.card-calendar
+                  .card-header
+                    h4 #{app.plan.startDate.getFullYear()}.#{app.plan.startDate.getMonth()+1}.#{app.plan.startDate.getDate()}~#{app.plan.endDate.getFullYear()}.#{app.plan.endDate.getMonth()+1}.#{app.plan.endDate.getDate()} 중 팀플이 잡힐 예정입니다.
+                    h4 되는 시간을 모두 선택해주세요.
+                  .card-content
+                    #fullCalendar
+        include ../includes/footer
+    include ../includes/scripts_input
+    script(type='text/javascript').
+      $(document).ready(function() {
+      demo.initFullCalendar();
+      });
+  // Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js

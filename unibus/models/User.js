@@ -49,16 +49,16 @@ var userSchema=mongoose.Schema({
     ref:'Post',
     default:[]
   }],
-  appointments:[{
+  appointment:{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Appointment',
-    default:[]
-  }],
-  schedules:[{
+    //default:[]
+  },
+  schedule:{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Schedule',
-    default:[]
-  }],
+    //default:[]
+  },
   isFreeRider:{
     type:Boolean,
     default:false,

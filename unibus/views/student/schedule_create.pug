@@ -10,4 +10,17 @@ html(lang='en')
         include ../includes/navbar
         .content
           .container-fluid
-            .card
+            .row
+              .col-md-10.col-md-offset-1
+                .card.card-calendar
+                  .card-header
+                    h4 모임을 가질 날들을 선택해주세요
+                  .card-content
+                    #fullCalendar
+        include ../includes/footer
+    include ../includes/scripts
+    script(type='text/javascript').
+      $(document).ready(function() {
+      demo.initFullCalendar();
+      });
+  // Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js

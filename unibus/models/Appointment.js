@@ -12,7 +12,7 @@ var appointmentSchema = mongoose.Schema({
   users:[{
     type:mongoose.SchemaTypes.ObjectId,
     ref:'User',
-    default:''
+    default:[]
   }],
   info:{
     type:String
@@ -28,7 +28,7 @@ var appointmentSchema = mongoose.Schema({
     schedules:[{
       type:mongoose.SchemaTypes.ObjectId,
       ref:'Schedule',
-      default:[]
+      //default:[]
     }],
   },
   is_fixed:{

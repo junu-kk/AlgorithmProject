@@ -9,14 +9,36 @@ var scheduleSchema=mongoose.Schema({
     type:mongoose.SchemaTypes.ObjectId,
     ref:'Appointment'
   },
-  time:[{
-    start:{
-      type:Date
-    },
-    end:{
-      type:Date
-    }
-  }]
+  start0:{
+    type:Date
+  },
+  end0:{
+    type:Date
+  },
+  start1:{
+    type:Date
+  },
+  end1:{
+    type:Date
+  },
+  start2:{
+    type:Date
+  },
+  end2:{
+    type:Date
+  },
+  start3:{
+    type:Date
+  },
+  end3:{
+    type:Date
+  },
+  start4:{
+    type:Date
+  },
+  end4:{
+    type:Date
+  },
 });
 
 scheduleSchema.methods={

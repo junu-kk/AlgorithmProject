@@ -808,7 +808,9 @@ demo = {
         y = today.getFullYear();
         m = today.getMonth();
         d = today.getDate();
-
+        var schs=[];
+      
+        
         $calendar.fullCalendar({
             viewRender: function(view, element) {
                 // We make sure that we activate the perfect scrollbar when the view isn't on Month
@@ -860,7 +862,72 @@ demo = {
     						start: start,
     						end: end
               };
+              $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
               console.log(eventData);
+              schs.push(eventData);
+              console.log(schs);
+              
+              if(schs.length==5){
+                var form = document.createElement("form");
+                form.setAttribute('method', 'POST');
+                form.setAttribute('action', '/schedule/input');
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'start0');
+                hiddenField.setAttribute('value', schs[0].start);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'end0');
+                hiddenField.setAttribute('value', schs[0].end);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'start1');
+                hiddenField.setAttribute('value', schs[1].start);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'end1');
+                hiddenField.setAttribute('value', schs[1].end);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'start2');
+                hiddenField.setAttribute('value', schs[2].start);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'end2');
+                hiddenField.setAttribute('value', schs[2].end);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'start3');
+                hiddenField.setAttribute('value', schs[3].start);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'end3');
+                hiddenField.setAttribute('value', schs[3].end);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'start4');
+                hiddenField.setAttribute('value', schs[4].start);
+                form.appendChild(hiddenField);
+                var hiddenField = document.createElement('input');
+                hiddenField.setAttribute('type', 'hidden');
+                hiddenField.setAttribute('name', 'end4');
+                hiddenField.setAttribute('value', schs[4].end);
+                form.appendChild(hiddenField);
+                document.body.appendChild(form);
+                form.submit();
+              }
+
+              
+              
+              /*
               var form = document.createElement("form");
               form.setAttribute('method', 'POST');
               form.setAttribute('action', '/schedule/create');
@@ -885,6 +952,7 @@ demo = {
 
               document.body.appendChild(form);
               form.submit();
+              */
     					//$calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
     				}
 
@@ -893,7 +961,7 @@ demo = {
                 });
 			},
 			editable: true,
-			eventLimit: true, // allow "more" link when too many events
+			eventLimit: false, // allow "more" link when too many events
 
 
             // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
@@ -960,7 +1028,10 @@ demo = {
         }
         */
 			]
-		});
+    });
+    
+    
+    
     },
 
 	showNotification: function(from, align){
