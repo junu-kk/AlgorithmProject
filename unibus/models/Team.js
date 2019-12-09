@@ -26,10 +26,11 @@ var teamSchema=mongoose.Schema({
     ref:'Post',
     default:[]
   }],
-  appointments:[{
+  appointment:{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'Appointment'
-  }]
+    ref:'Appointment',
+    default:''
+  }
 });
 
 teamSchema.methods={

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var appointmentSchema = mongoose.Schema({
   date:{
     type:Date,
-    default:Date.now,
+    default:''
   },
   team:{
     type:mongoose.SchemaTypes.ObjectId,
@@ -11,7 +11,8 @@ var appointmentSchema = mongoose.Schema({
   },
   users:[{
     type:mongoose.SchemaTypes.ObjectId,
-    ref:'User'
+    ref:'User',
+    default:''
   }],
   info:{
     type:String
@@ -26,7 +27,8 @@ var appointmentSchema = mongoose.Schema({
     },
     schedules:[{
       type:mongoose.SchemaTypes.ObjectId,
-      ref:'Schedule'
+      ref:'Schedule',
+      default:[]
     }],
   },
   is_fixed:{

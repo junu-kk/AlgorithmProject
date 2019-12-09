@@ -10,7 +10,10 @@
   피드 : /main, 게시물관련은 /post에서.
   일정
     생성하기 : /schedule/create
+      생성전 : 시작일, 종료일 입력
+      생성후 : 조원 일정등록여부 체크, 가중치 설정
     입력하기 : /schedule/input
+      아무나 : 
   프리라이더를 찾아라! : /team/freerider
   팀정보 : /team
 
@@ -21,3 +24,6 @@
     팀 만들어진 이후 :  /professor
   강의개설 : /professor/create_class
   데이터 출력 : /professor/result
+
+일정을 어떻게 할까.
+calendar를 쓰면 정말정말 좋겠지만 아쉽게도 ㄴㄴ.
