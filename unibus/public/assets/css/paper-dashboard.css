@@ -12132,6 +12132,28 @@ star {
   font-size: 500px;
 }
 
+.post-card{
+  border-bottom : 1px solid gray;
+}
+
+.post-title{
+  font-size: 23px;
+  font-weight: bolder;
+  line-height: 200%;
+}
+
+.bulletin-board{
+  width: 100%;
+  min-height: 500px;
+}
+
+.post-content{
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+  line-height: 200%;
+  white-space: pre-line;
+}
 
 /* 여기까지 */
 

@@ -78,7 +78,7 @@ router.get('/:id', (req,res)=>{
           });
         });
       }
-      res.render('student/post',{
+      res.render('student/post_wkc',{
         user:user,
         post:post
       });
