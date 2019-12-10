@@ -25,34 +25,74 @@
                 span.sidebar-mini Mp
                 span.sidebar-normal My Profile
     ul.nav
-      li.active
-        a(href='/main')
-          i.ti-panel
-          p 피드
-      li
-        a(data-toggle='collapse', href='#componentsExamples')
-          i.ti-calendar
-          p
-            | 일정
-            b.caret
-        #componentsExamples.collapse
-          ul.nav
-            li
-              a(href='/schedule/create')
-                span.sidebar-mini 생
-                span.sidebar-normal 생성하기
-            li
-              a(href='/schedule/input')
-                span.sidebar-mini 입
-                span.sidebar-normal 입력하기
-      li
-        a(href='/team/freerider')
-          // 프리라이더 페이지 생성 필요
-          i.ti-gift
-          p
-            | 프리라이더를 찾아라!
-      li
-        a(href='/team')
-          i.ti-user
-          p
-            | 팀 정보
+      
+      -if(active=='main')
+        li.active
+          a(href='/main')
+            i.ti-panel
+            p 피드
+      -else
+        li
+          a(href='/main')
+            i.ti-panel
+            p 피드
+      -if(active=='schedule')
+        li.active
+          a(data-toggle='collapse', href='#componentsExamples')
+            i.ti-calendar
+            p
+              | 일정
+              b.caret
+          #componentsExamples.collapse
+            ul.nav
+              li
+                a(href='/schedule/create')
+                  span.sidebar-mini 생
+                  span.sidebar-normal 생성하기
+              li
+                a(href='/schedule/input')
+                  span.sidebar-mini 입
+                  span.sidebar-normal 입력하기
+      -else
+        li
+          a(data-toggle='collapse', href='#componentsExamples')
+            i.ti-calendar
+            p
+              | 일정
+              b.caret
+          #componentsExamples.collapse
+            ul.nav
+              li
+                a(href='/schedule/create')
+                  span.sidebar-mini 생
+                  span.sidebar-normal 생성하기
+              li
+                a(href='/schedule/input')
+                  span.sidebar-mini 입
+                  span.sidebar-normal 입력하기
+      -if(active=='freerider')
+        li.active
+          a(href='/team/freerider')
+            // 프리라이더 페이지 생성 필요
+            i.ti-gift
+            p
+              | 프리라이더를 찾아라!
+      -else
+        li
+          a(href='/team/freerider')
+            // 프리라이더 페이지 생성 필요
+            i.ti-gift
+            p
+              | 프리라이더를 찾아라!
+      -if(active=='team')
+        li.active
+          a(href='/team')
+            i.ti-user
+            p
+              | 팀 정보
+      -else
+        li
+          a(href='/team')
+            i.ti-user
+            p
+              | 팀 정보

@@ -23,7 +23,8 @@ router.get('/create', (req,res)=>{
       if(err) throw err;
       if(team.appointment) return res.redirect('/schedule/fix');
       else res.render('student/schedule_create',{
-        user:user
+        user:user,
+        active:'schedule'
       });
     });
   });
@@ -82,7 +83,8 @@ router.get('/input', (req,res)=>{
       else{
         res.render('student/schedule_input',{
           user:user,
-          app:team.appointment
+          app:team.appointment,
+          active:'schedule'
         });
       }
     });
@@ -151,7 +153,8 @@ router.get('/fix', (req,res)=>{
         res.render('student/schedule_fix',{
           user:user,
           app:appointment,
-          team:team
+          team:team,
+          active:'schedule'
         });
       });
       
@@ -171,7 +174,8 @@ router.get('/result', (req,res)=>{
       if(err) throw err;
       return res.render('student/result',{
         user:user,
-        team:team
+        team:team,
+        active:'schedule'
       });
     });
   });

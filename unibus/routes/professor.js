@@ -28,7 +28,8 @@ router.get('/', (req,res)=>{
       }
       res.render('professor/main_new',{
         user:user,
-        classs:classs
+        classs:classs,
+        active:'main'
       })
     })
     .catch((err)=>{
@@ -64,6 +65,7 @@ router.get('/create_class', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     res.render('professor/class_create_new',{
       user:user,
+      active:'create_class'
     });
   });
 });
@@ -109,7 +111,9 @@ router.get('/create_team', (req,res)=>{
       if(err) throw err;
       res.render('professor/team_create_new', {
         user:user,
-        classs:classs
+        classs:classs,
+        active:'main'
+        
       });
     });
   });

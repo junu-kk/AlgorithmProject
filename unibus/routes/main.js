@@ -21,6 +21,7 @@ router.get('/', (req, res)=> {
       res.render('student/main_new', {
         user:user,
         posts:posts,
+        active:'main',
       });
     });
   });
@@ -29,7 +30,8 @@ router.get('/', (req, res)=> {
 router.get('/no_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     res.render('student/no_team',{
-      user:user
+      user:user,
+      active:'main'
     });
   });
 });
@@ -38,7 +40,8 @@ router.get('/enroll', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     //경찬이 완성되면 enroll_new로 바꿀것.
     res.render('student/enroll_wkc', {
-      user:user
+      user:user,
+      active:'main'
     });
   });
 });

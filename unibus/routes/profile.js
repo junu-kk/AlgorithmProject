@@ -13,7 +13,8 @@ function authCheck(req, res, callback){
 router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     res.render('student/profile_new', {
-      user:user
+      user:user,
+      active:'profile'
     });
   });
 });

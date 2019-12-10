@@ -20,22 +20,48 @@
           .clearfix
           #collapseExample.collapse
             ul.nav
-              li
-                a(href='/professor/profile')
-                  span.sidebar-mini Mp
-                  span.sidebar-normal My Profile
+              -if(active=='profile')
+                li.active
+                  a(href='/professor/profile')
+                    span.sidebar-mini Mp
+                    span.sidebar-normal My Profile
+              -else
+                li
+                  a(href='/professor/profile')
+                    span.sidebar-mini Mp
+                    span.sidebar-normal My Profile
       ul.nav
-        li
-          a(href='/main')
-            i.ti-star
-            p &#xBA54;&#xC778; &#xD398;&#xC774;&#xC9C0;
-        li
-          a(href='/professor/create_class')
-            i.ti-cloud-up
-            p
-              | &#xAC15;&#xC758;&#xAC1C;&#xC124;
-        li
-          a(data-toggle='collapse' href='/professor/result')
-            i.ti-bar-chart
-            p
-              | &#xB370;&#xC774;&#xD130; &#xCD9C;&#xB825;
+        -if(active=='main')
+          li.active
+            a(href='/main')
+              i.ti-star
+              p &#xBA54;&#xC778; &#xD398;&#xC774;&#xC9C0;
+        -else
+          li
+            a(href='/main')
+              i.ti-star
+              p &#xBA54;&#xC778; &#xD398;&#xC774;&#xC9C0;
+        -if(active=='create_class')
+          li.active
+            a(href='/professor/create_class')
+              i.ti-cloud-up
+              p
+                | &#xAC15;&#xC758;&#xAC1C;&#xC124;
+        -else
+          li
+            a(href='/professor/create_class')
+              i.ti-cloud-up
+              p
+                | &#xAC15;&#xC758;&#xAC1C;&#xC124;
+        -if(active=='result')
+          li.active
+            a(data-toggle='collapse' href='/professor/result')
+              i.ti-bar-chart
+              p
+                | &#xB370;&#xC774;&#xD130; &#xCD9C;&#xB825;
+        -else
+          li
+            a(data-toggle='collapse' href='/professor/result')
+              i.ti-bar-chart
+              p
+                | &#xB370;&#xC774;&#xD130; &#xCD9C;&#xB825;

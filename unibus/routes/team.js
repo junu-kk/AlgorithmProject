@@ -16,12 +16,14 @@ router.get('/', (req,res)=>{
       if(user.isLeader){
         return res.render('student/team_leader',{
           user:user,
-          team:team
+          team:team,
+          active:'team'
         });
       } else{
         res.render('student/team_member',{
           user:user,
-          team:team
+          team:team,
+          active:'team'
         });
       }
     });
@@ -63,7 +65,8 @@ router.get('/freerider', (req,res)=>{
       return res.render('student/freerider',{
         user:user,
         team:team,
-        freerider:team.members[minIndex]
+        freerider:team.members[minIndex],
+        active:'freerider'
       });
       
     });
