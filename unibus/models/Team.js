@@ -1,3 +1,4 @@
+//code for team schema
 var mongoose = require('mongoose');
 
 var teamSchema=mongoose.Schema({

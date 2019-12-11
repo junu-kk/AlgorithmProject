@@ -1,3 +1,4 @@
+//code for post schema
 var mongoose = require('mongoose');
 
 var postSchema=mongoose.Schema({

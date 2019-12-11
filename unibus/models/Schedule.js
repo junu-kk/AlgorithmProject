@@ -1,3 +1,4 @@
+//code for schedule schema
 var mongoose = require('mongoose');
 
 var scheduleSchema=mongoose.Schema({

@@ -1,3 +1,4 @@
+//code for appointment schema
 var mongoose = require('mongoose');
 
 var appointmentSchema = mongoose.Schema({

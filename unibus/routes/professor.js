@@ -1,4 +1,4 @@
-//router of professor page
+//교수자 라우터
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
@@ -7,14 +7,14 @@ var Team = require('../models/Team');
 var multer = require('multer');
 var upload = multer({dest:'./upload'});
 
+//로그인 안되어있으면 로그인으로 리다이렉트, 학생이면 학생으로 리다이렉트, 아니면 콜백함수 실행.
 function authCheck(req, res, callback){
   if(req.isUnauthenticated()) return res.redirect('/login');
   if(req.user.type=="Student") return res.redirect('/main');
   if(req.user.type=="Professor") callback(req,res,req.user);
 }
 
-
-
+//교수자 메인
 router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(!user.class) return res.redirect('/professor/create_class');
@@ -38,7 +38,7 @@ router.get('/', (req,res)=>{
   });
 });
 
-
+//교수자 프로필
 router.get('/profile', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     res.render('professor/profile_new', {
@@ -47,6 +47,7 @@ router.get('/profile', (req,res)=>{
   });
 });
 
+//교수자 프로필사진 업로드
 router.post('/profile/upload', upload.single('file'), (req, res, next) => {
   let image='/image/'+req.file.filename;
   authCheck(req,res,(req,res,user)=>{
@@ -61,6 +62,7 @@ router.post('/profile/upload', upload.single('file'), (req, res, next) => {
   });
 });
 
+//교수자의 강의생성 get
 router.get('/create_class', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     res.render('professor/class_create_new',{
@@ -70,6 +72,7 @@ router.get('/create_class', (req,res)=>{
   });
 });
 
+//교수자의 강의생성 post
 router.post('/create_class', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     var newClass = new Class();
@@ -105,6 +108,7 @@ router.post('/create_class', (req,res)=>{
   });
 })
 
+//교수자의 팀짜기 get
 router.get('/create_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Class.findById(user.class).populate('students').exec((err,classs)=>{
@@ -120,7 +124,7 @@ router.get('/create_team', (req,res)=>{
 });
 
 // 드디어해결...warning뜨지만알바아니야....promise써서해결했다..ㅜㅜ
-
+//교수자 팀짜기 post
 router.post('/create_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Class.findById(user.class).exec((err,classs)=>{

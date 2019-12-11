@@ -1,10 +1,11 @@
-//router of main page
+//학생쪽 메인 라우터
 var express = require('express');
 var router = express.Router();
 var Class = require('../models/Class');
 var Post = require('../models/Post');
 var User = require('../models/User');
 
+//로그인 안되어있으면 로그인으로 리다이렉트, 교수자면 교수자로 리다이렉트, 아니면 콜백함수 실행.
 function authCheck(req, res, callback){
   if(req.isUnauthenticated()) return res.redirect('/login');
   if(req.user.type=="Professor") return res.redirect('/professor');
@@ -27,6 +28,7 @@ router.get('/', (req, res)=> {
   });
 });
 
+//팀이 없는 경우
 router.get('/no_team', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     res.render('student/no_team',{
@@ -36,9 +38,9 @@ router.get('/no_team', (req,res)=>{
   });
 });
 
+//강의등록하기 get
 router.get('/enroll', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
-    //경찬이 완성되면 enroll_new로 바꿀것.
     res.render('student/enroll_wkc', {
       user:user,
       active:'main'
@@ -46,6 +48,7 @@ router.get('/enroll', (req,res)=>{
   });
 });
 
+//강의등록하기 post
 router.post('/enroll', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Class.findById(req.body._id).exec((err,classs)=>{

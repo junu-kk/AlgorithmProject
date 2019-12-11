@@ -1,3 +1,4 @@
+//스케줄 라우터
 var express = require('express');
 var router = express.Router();
 var Appointment = require('../models/Appointment');
@@ -5,13 +6,14 @@ var Team = require('../models/Team');
 var Schedule = require('../models/Schedule');
 var User = require('../models/User');
 
+//로그인 안되어있으면 로그인으로 리다이렉트, 교수자면 교수자로 리다이렉트, 아니면 콜백함수 실행.
 function authCheck(req, res, callback){
   if(req.isUnauthenticated()) return res.redirect('/login');
   if(req.user.type=="Professor") return res.redirect('/professor');
   if(req.user.type=="Student") callback(req,res,req.user);
 }
 
-//appointment를 생성하자.
+//appointment 생성 get
 router.get('/create', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(!user.isLeader){
@@ -30,6 +32,7 @@ router.get('/create', (req,res)=>{
   });
 });
 
+//appointment 생성 post
 router.post('/create', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     var newAppointment = new Appointment();
@@ -75,6 +78,8 @@ router.post('/create', (req,res)=>{
   });
 });
 */
+
+//schedule 입력받기 get
 router.get('/input', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Team.findById(user.team).populate('appointment').exec((err,team)=>{
@@ -91,6 +96,7 @@ router.get('/input', (req,res)=>{
   });
 });
 
+//schedule 입력받기 post
 router.post('/input', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Team.findById(user.team).exec((err,team)=>{
@@ -139,6 +145,7 @@ router.post('/input', (req,res)=>{
   res.redirect('/main');
 })
 
+//appointment 확정하기 get
 router.get('/fix', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(!user.isLeader){
@@ -163,11 +170,13 @@ router.get('/fix', (req,res)=>{
   });
 });
 
+//appointment 확정하기 post
 router.post('/fix', (req,res)=>{
   //그리디가 들어가는 부분. 추후구현예정
   res.redirect('/schedule/result');
 });
 
+//결정된 appointment 보여주기
 router.get('/result', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Team.findById(user.team).populate('members').exec((err,team)=>{

@@ -1,14 +1,17 @@
+//팀페이지 라우터
 var express = require('express');
 var router= express.Router();
 var User = require('../models/User');
 var Team = require('../models/Team')
 
+//로그인 안되어있으면 로그인으로 리다이렉트, 교수자면 교수자로 리다이렉트, 아니면 콜백함수 실행.
 function authCheck(req, res, callback){
   if(req.isUnauthenticated()) return res.redirect('/login');
   if(req.user.type=="Professor") return res.redirect('/professor');
   if(req.user.type=="Student") callback(req,res,req.user);
 }
 
+//리더면 리더용 팀페이지, 멤버면 멤버용 팀페이지
 router.get('/', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Team.findById(user.team).populate('members').exec((err,team)=>{
@@ -30,6 +33,7 @@ router.get('/', (req,res)=>{
   });
 });
 
+//역할 정해주기
 router.post('/setjob', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     Team.findById(user.team).populate('members').exec((err,team)=>{
@@ -47,6 +51,7 @@ router.post('/setjob', (req,res)=>{
   });
 });
 
+//프리라이더 설정하기 get
 router.get('/freerider', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     if(!user.isLeader) return res.render('student/warning');
@@ -73,6 +78,7 @@ router.get('/freerider', (req,res)=>{
   });
 });
 
+//프리라이더 설정하기 post
 router.post('/freerider', (req,res)=>{
   authCheck(req,res,(req,res,user)=>{
     

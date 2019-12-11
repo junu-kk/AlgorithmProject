@@ -1,3 +1,4 @@
+//인덱스 라우터. 인증기능들.
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
